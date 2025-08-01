@@ -1,637 +1,554 @@
-// Random Adventure Picker - Bay Area Implementation
+// Random Adventure Picker - Multi-Region Implementation
 
-// Activity Categories for Bay Area Adventures
+// Activity Categories for Adventures
 const activityCategories = [
-    { name: 'ART', color: '#e67e22' },
-    { name: 'ANIMALS', color: '#3498db' },
-    { name: 'THEME PARKS', color: '#e67e22' },
-    { name: 'WALKS', color: '#3498db' },
-    { name: 'ADVENTURE', color: '#e67e22' },
-    { name: 'WATER', color: '#3498db' },
-    { name: 'SPORT', color: '#e67e22' }
+    { name: 'ART', color: '#d4956a' },
+    { name: 'ANIMALS', color: '#7ba3c4' },
+    { name: 'THEME PARKS', color: '#d4956a' },
+    { name: 'WALKS', color: '#7ba3c4' },
+    { name: 'ADVENTURE', color: '#d4956a' },
+    { name: 'WATER', color: '#7ba3c4' },
+    { name: 'SPORT', color: '#d4956a' }
 ];
 
-// Bay Area Activities Database organized by category and difficulty
-const bayAreaActivities = {
-    'ART': {
-        'chill': [
-            {
-                name: 'Mission District Murals',
-                description: 'Self-guided tour of vibrant street art and murals',
-                duration: '1-2 hours',
-                detailedDescription: 'Explore colorful murals along Balmy Alley, Clarion Alley, and throughout the Mission District. These murals tell stories of Latino culture, social justice, and community pride.',
-                locationDetails: 'Start at 24th Street BART station, San Francisco. Street parking available.',
-                tips: ['Best light for photos in late afternoon', 'Respect residents and private property', 'Combine with Mission food tour', 'Murals change regularly']
+// Regional Activities Database
+const regionsData = {
+    sf: {
+        name: 'San Francisco Bay Area',
+        activities: {
+            'ART': {
+                'chill': [
+                    {
+                        name: 'Mission District Murals',
+                        description: 'Self-guided tour of vibrant street art and murals',
+                        duration: '1-2 hours',
+                        detailedDescription: 'Explore colorful murals along Balmy Alley, Clarion Alley, and throughout the Mission District. These murals tell stories of Latino culture, social justice, and community pride.',
+                        locationDetails: 'Start at 24th Street BART station, San Francisco. Street parking available.',
+                        tips: ['Best light for photos in late afternoon', 'Respect residents and private property', 'Combine with Mission food tour', 'Murals change regularly']
+                    },
+                    {
+                        name: 'de Young Museum',
+                        description: 'Fine arts museum in Golden Gate Park',
+                        duration: '2-3 hours',
+                        detailedDescription: 'World-class museum featuring American art, contemporary works, and rotating exhibitions. The observation tower offers panoramic city views.',
+                        locationDetails: '50 Hagiwara Tea Garden Dr, Golden Gate Park, SF. Paid parking available.',
+                        tips: ['Free tower views with admission', 'First Tuesday free for SF residents', 'Combine with Japanese Tea Garden visit', 'Museum store has unique gifts']
+                    }
+                ],
+                'moderate': [
+                    {
+                        name: 'SFMOMA',
+                        description: 'Modern and contemporary art museum',
+                        duration: '3-4 hours',
+                        detailedDescription: 'Seven floors of modern and contemporary art including works by Jackson Pollock, Andy Warhol, and Frida Kahlo. The building architecture is as impressive as the collection.',
+                        locationDetails: '151 3rd St, SOMA, San Francisco. Paid parking garage available.',
+                        tips: ['Free for SF residents first Thursday', 'Download museum app for audio tours', 'Rooftop sculpture garden', 'Multiple dining options on-site']
+                    }
+                ],
+                'epic': [
+                    {
+                        name: 'Berkeley Art Museum Full Experience',
+                        description: 'Deep dive into avant-garde and experimental art',
+                        duration: '4-6 hours',
+                        detailedDescription: 'Complete exploration of BAMPFA with its cutting-edge contemporary art, film screenings, and special exhibitions. Known for pushing artistic boundaries.',
+                        locationDetails: '2120 Oxford St, Berkeley. Street parking or paid lots nearby.',
+                        tips: ['Check film screening schedule', 'Student discounts available', 'Free first Thursday evenings', 'Combine with UC Berkeley campus walk']
+                    }
+                ]
             },
-            {
-                name: 'de Young Museum',
-                description: 'Fine arts museum in Golden Gate Park',
-                duration: '2-3 hours',
-                detailedDescription: 'World-class museum featuring American art, contemporary works, and rotating exhibitions. The observation tower offers panoramic city views.',
-                locationDetails: '50 Hagiwara Tea Garden Dr, Golden Gate Park, SF. Paid parking available.',
-                tips: ['Free tower views with admission', 'First Tuesday free for SF residents', 'Combine with Japanese Tea Garden visit', 'Museum store has unique gifts']
-            }
-        ],
-        'moderate': [
-            {
-                name: 'SFMOMA',
-                description: 'Modern and contemporary art museum',
-                duration: '3-4 hours',
-                detailedDescription: 'Seven floors of modern and contemporary art including works by Jackson Pollock, Andy Warhol, and Frida Kahlo. The building architecture is as impressive as the collection.',
-                locationDetails: '151 3rd St, SOMA, San Francisco. Paid parking garage available.',
-                tips: ['Free for SF residents first Thursday', 'Download museum app for audio tours', 'Rooftop sculpture garden', 'Multiple dining options on-site']
+            'ANIMALS': {
+                'chill': [
+                    {
+                        name: 'San Francisco Zoo',
+                        description: 'Urban zoo with diverse animal exhibits',
+                        duration: '2-4 hours',
+                        detailedDescription: 'Home to over 2,000 animals including lions, penguins, and gorillas. Features the Little Puffer miniature train and interactive farm area for families.',
+                        locationDetails: 'Sloat Blvd & 47th Ave, San Francisco. Free parking available.',
+                        tips: ['Can be cold and foggy near ocean', 'Feeding times offer best animal viewing', 'Train ride popular with kids', 'Annual passes pay off after 2 visits']
+                    }
+                ],
+                'moderate': [
+                    {
+                        name: 'Oakland Zoo',
+                        description: 'Conservation-focused zoo in the hills',
+                        duration: '3-4 hours',
+                        detailedDescription: 'Home to over 750 native and exotic animals with strong conservation focus. The gondola ride offers spectacular views of the entire Bay Area.',
+                        locationDetails: '9777 Golf Links Rd, Oakland Hills. Free parking available.',
+                        tips: ['Take gondola for amazing bay views', 'California Trail features native species', 'Less crowded than SF Zoo', 'Great picnic areas throughout']
+                    }
+                ]
             },
-            {
-                name: 'Oakland First Fridays',
-                description: 'Monthly art walk and street festival',
-                duration: '2-4 hours',
-                detailedDescription: 'Massive monthly celebration featuring gallery openings, street art, food trucks, live performances, and local vendors throughout downtown Oakland arts district.',
-                locationDetails: 'Telegraph Ave, downtown Oakland, first Friday of each month 6-10pm.',
-                tips: ['Very crowded - arrive early', 'Free event, pay for food/drinks', 'Wear comfortable walking shoes', 'Some galleries open other days too']
+            'WATER': {
+                'chill': [
+                    {
+                        name: 'Aquatic Cove Swimming',
+                        description: 'Open water swimming in San Francisco Bay',
+                        duration: '1-2 hours',
+                        detailedDescription: 'Join the hardy souls who swim year-round in the chilly but invigorating waters of Aquatic Cove near Fisherman\'s Wharf.',
+                        locationDetails: 'Aquatic Cove, near Ghirardelli Square, San Francisco. Street parking available.',
+                        tips: ['Water is cold year-round (50-65°F)', 'Wetsuit recommended', 'Strong swimming skills required', 'Best at high tide']
+                    }
+                ]
             }
-        ],
-        'epic': [
-            {
-                name: 'Berkeley Art Museum Full Experience',
-                description: 'Deep dive into avant-garde and experimental art',
-                duration: '4-6 hours',
-                detailedDescription: 'Complete exploration of BAMPFA with its cutting-edge contemporary art, film screenings, and special exhibitions. Known for pushing artistic boundaries.',
-                locationDetails: '2120 Oxford St, Berkeley. Street parking or paid lots nearby.',
-                tips: ['Check film screening schedule', 'Student discounts available', 'Free first Thursday evenings', 'Combine with UC Berkeley campus walk']
-            }
-        ]
+        }
     },
-    
-    'ANIMALS': {
-        'chill': [
-            {
-                name: 'San Francisco Zoo',
-                description: 'Urban zoo with diverse animal exhibits',
-                duration: '2-4 hours',
-                detailedDescription: 'Home to over 2,000 animals including lions, penguins, and gorillas. Features the Little Puffer miniature train and interactive farm area for families.',
-                locationDetails: 'Sloat Blvd & 47th Ave, San Francisco. Free parking available.',
-                tips: ['Can be cold and foggy near ocean', 'Feeding times offer best animal viewing', 'Train ride popular with kids', 'Annual passes pay off after 2 visits']
+    southbay: {
+        name: 'South Bay / San Jose Area',
+        activities: {
+            'ART': {
+                'chill': [
+                    {
+                        name: 'San Jose Museum of Art',
+                        description: 'Contemporary and modern art in downtown San Jose',
+                        duration: '2-3 hours',
+                        detailedDescription: 'Features contemporary and modern art with a focus on West Coast artists. Regular rotating exhibitions showcase emerging and established artists.',
+                        locationDetails: '110 S Market St, San Jose. Light rail accessible, paid parking nearby.',
+                        tips: ['Free first Friday evenings', 'Combine with downtown San Jose dining', 'Family-friendly programs available', 'Student discounts offered']
+                    },
+                    {
+                        name: 'Triton Museum of Art',
+                        description: 'Community art museum in Santa Clara',
+                        duration: '1-2 hours',
+                        detailedDescription: 'Intimate museum featuring contemporary art, Native American art, and rotating exhibitions. Beautiful outdoor sculpture garden.',
+                        locationDetails: '1505 Warburton Ave, Santa Clara. Free parking available.',
+                        tips: ['Always free admission', 'Sculpture garden great for photos', 'Regular artist talks and workshops', 'Less crowded weekday afternoons']
+                    }
+                ],
+                'moderate': [
+                    {
+                        name: 'Montalvo Arts Center',
+                        description: 'Historic estate with art galleries and gardens',
+                        duration: '3-4 hours',
+                        detailedDescription: 'Beautiful hillside estate featuring contemporary art exhibitions, outdoor sculptures, and stunning gardens. Regular concerts and performances.',
+                        locationDetails: '15400 Montalvo Rd, Saratoga. Free parking, winding mountain road.',
+                        tips: ['Free admission to grounds and galleries', 'Hiking trails behind property', 'Bring picnic for gardens', 'Check event calendar for concerts']
+                    }
+                ]
             },
-            {
-                name: 'Aquarium of the Bay',
-                description: 'Walk-through tunnels with bay marine life',
-                duration: '1-2 hours',
-                detailedDescription: 'Crystal-clear tunnels let you walk through the San Francisco Bay ecosystem. See sharks, rays, and thousands of local fish swimming overhead and around you.',
-                locationDetails: 'Pier 39, Fishermans Wharf, San Francisco. Paid parking or public transit recommended.',
-                tips: ['Combine with other Pier 39 attractions', 'Behind-scenes tours available', 'Touch tanks for hands-on experience', 'Less crowded weekday mornings']
-            }
-        ],
-        'moderate': [
-            {
-                name: 'Oakland Zoo',
-                description: 'Conservation-focused zoo in the hills',
-                duration: '3-4 hours',
-                detailedDescription: 'Home to over 750 native and exotic animals with strong conservation focus. The gondola ride offers spectacular views of the entire Bay Area.',
-                locationDetails: '9777 Golf Links Rd, Oakland Hills. Free parking available.',
-                tips: ['Take gondola for amazing bay views', 'California Trail features native species', 'Less crowded than SF Zoo', 'Great picnic areas throughout']
+            'ANIMALS': {
+                'chill': [
+                    {
+                        name: 'Happy Hollow Park & Zoo',
+                        description: 'Family-friendly zoo and amusement park',
+                        duration: '3-4 hours',
+                        detailedDescription: 'Compact zoo featuring over 140 animals plus vintage rides and puppet shows. Perfect for families with young children.',
+                        locationDetails: '748 Story Rd, San Jose. Free parking in Kelley Park.',
+                        tips: ['Combination zoo and amusement park', 'Great for kids under 10', 'Puppet shows included with admission', 'Can get crowded on weekends']
+                    }
+                ],
+                'moderate': [
+                    {
+                        name: 'Wildlife Education & Rehabilitation Center',
+                        description: 'Native wildlife rescue and education center',
+                        duration: '2-3 hours',
+                        detailedDescription: 'See native California wildlife being rehabilitated including raptors, foxes, and other local species. Educational programs teach about local ecosystems.',
+                        locationDetails: '1855 Naglee Ave, San Jose. Limited parking, call ahead.',
+                        tips: ['Tours by appointment only', 'Focus on native California species', 'Great for educational visits', 'Donations help support wildlife rescue']
+                    }
+                ]
             },
-            {
-                name: 'Marine Mammal Center',
-                description: 'Wildlife hospital and education center',
-                duration: '2-3 hours',
-                detailedDescription: 'See rescued seals, sea lions, and other marine mammals being rehabilitated. Educational tours explain marine conservation efforts.',
-                locationDetails: '2000 Bunker Rd, Sausalito (Marin Headlands). Free parking.',
-                tips: ['Free admission, donations welcome', 'Best viewing during feeding times', 'Dress warmly - can be windy', 'Call ahead for tour availability']
+            'ADVENTURE': {
+                'moderate': [
+                    {
+                        name: 'Almaden Quicksilver County Park',
+                        description: 'Historic mining park with hiking trails',
+                        duration: '2-4 hours',
+                        detailedDescription: 'Explore old mercury mining sites along scenic hiking trails. Rich history combined with beautiful oak woodlands and grasslands.',
+                        locationDetails: '21350 Almaden Rd, San Jose. Free parking at multiple trailheads.',
+                        tips: ['Historic mining equipment visible', 'Can be hot in summer', 'Dogs allowed on leash', 'Multiple trail difficulty levels']
+                    },
+                    {
+                        name: 'Castle Rock State Park',
+                        description: 'Rock formations and hiking in Santa Cruz Mountains',
+                        duration: '3-5 hours',
+                        detailedDescription: 'Dramatic sandstone rock formations, redwood groves, and challenging hiking trails. Popular with rock climbers and hikers.',
+                        locationDetails: '15000 Skyline Blvd, Los Gatos. Limited parking, arrive early.',
+                        tips: ['Parking fills up early weekends', 'Rock climbing requires permits', 'Waterfall hikes in spring', 'Can be foggy and cool']
+                    }
+                ],
+                'epic': [
+                    {
+                        name: 'Mount Umunhum',
+                        description: 'Highest peak in Santa Clara County',
+                        duration: '4-6 hours',
+                        detailedDescription: 'Challenging hike to the highest peak in Santa Clara County (3,486 ft) with panoramic views of Silicon Valley and beyond. Historic radar tower at summit.',
+                        locationDetails: 'Bald Mountain Open Space Preserve, Los Gatos. Limited parking.',
+                        tips: ['Very steep final ascent', 'Amazing 360-degree views', 'Can be windy and cold at top', 'Start early for parking']
+                    }
+                ]
+            },
+            'WATER': {
+                'chill': [
+                    {
+                        name: 'Lake Vasona',
+                        description: 'Peaceful lake with pedal boats and walking paths',
+                        duration: '2-3 hours',
+                        detailedDescription: 'Serene lake perfect for pedal boating, walking, or picnicking. Tree-lined paths and duck watching make it ideal for relaxation.',
+                        locationDetails: '333 Blossom Hill Rd, Los Gatos. Free parking available.',
+                        tips: ['Pedal boat rentals available', 'Great for families', 'Connected to Los Gatos Creek Trail', 'Can feed ducks (bring appropriate food)']
+                    }
+                ],
+                'moderate': [
+                    {
+                        name: 'Lexington Reservoir',
+                        description: 'Large reservoir with hiking and fishing',
+                        duration: '3-4 hours',
+                        detailedDescription: 'Large reservoir in the Santa Cruz Mountains offering fishing, hiking trails, and beautiful water views. Popular for bass and trout fishing.',
+                        locationDetails: '17770 Alma Bridge Rd, Los Gatos. Free parking.',
+                        tips: ['Fishing license required', 'No swimming allowed', 'Great hiking trails around perimeter', 'Can be very busy on weekends']
+                    }
+                ]
+            },
+            'THEME PARKS': {
+                'epic': [
+                    {
+                        name: 'California\'s Great America',
+                        description: 'Major theme park with roller coasters',
+                        duration: '6-8 hours',
+                        detailedDescription: 'Full-scale theme park featuring world-class roller coasters, family rides, and seasonal events. Home to some of the tallest and fastest coasters on the West Coast.',
+                        locationDetails: '4701 Great America Pkwy, Santa Clara. Paid parking available.',
+                        tips: ['Buy tickets online for discounts', 'Fast Lane passes available', 'Soak City water park included', 'Very crowded summer weekends']
+                    }
+                ]
+            },
+            'WALKS': {
+                'chill': [
+                    {
+                        name: 'Santana Row',
+                        description: 'Upscale outdoor shopping and dining district',
+                        duration: '2-3 hours',
+                        detailedDescription: 'European-style outdoor shopping center with luxury stores, restaurants, and regular events. Great for people watching and window shopping.',
+                        locationDetails: '377 Santana Row, San Jose. Paid parking in structures.',
+                        tips: ['Free events and concerts regularly', 'High-end shopping and dining', 'Great people watching', 'Valet parking available']
+                    }
+                ],
+                'moderate': [
+                    {
+                        name: 'Los Gatos Creek Trail',
+                        description: 'Multi-use trail through Silicon Valley',
+                        duration: '2-4 hours',
+                        detailedDescription: 'Paved multi-use trail following Los Gatos Creek from the mountains to San Francisco Bay. Perfect for walking, cycling, or jogging.',
+                        locationDetails: 'Multiple access points from Los Gatos to San Jose Bay Trail.',
+                        tips: ['Connects to Bay Trail', 'Mostly flat and paved', 'Bike rentals available in Los Gatos', 'Can be crowded weekends']
+                    }
+                ]
             }
-        ],
-        'epic': [
-            {
-                name: 'Monterey Bay Aquarium Day Trip',
-                description: 'World-famous aquarium with kelp forest exhibit',
-                duration: '6-8 hours',
-                detailedDescription: 'Full day trip to one of the worlds best aquariums featuring the mesmerizing kelp forest, sea otter exhibit, and seasonal special exhibitions.',
-                locationDetails: '886 Cannery Row, Monterey. 2-hour drive from SF. Paid parking available.',
-                tips: ['Buy tickets online in advance', 'Peak times are very crowded', 'Combine with Cannery Row visit', 'Pack lunch or eat at aquarium café']
-            }
-        ]
+        }
     },
-
-    'THEME PARKS': {
-        'chill': [
-            {
-                name: 'Pier 39 Entertainment',
-                description: 'Waterfront entertainment complex with attractions',
-                duration: '2-4 hours',
-                detailedDescription: 'Family-friendly pier with street performers, shops, restaurants, and small attractions like the carousel and mirror maze. Sea lions often visible on the docks.',
-                locationDetails: 'Pier 39, Fishermans Wharf, San Francisco. Paid parking available.',
-                tips: ['Free to walk around, pay per attraction', 'Sea lions best viewed in afternoon', 'Very touristy but fun for families', 'Combine with Aquarium of the Bay']
-            }
-        ],
-        'moderate': [
-            {
-                name: 'Childrens Creativity Museum',
-                description: 'Interactive museum with animation studios',
-                duration: '2-3 hours',
-                detailedDescription: 'Hands-on museum where kids create their own stop-motion movies, music videos, and art. Features vintage carousel and multimedia exhibits.',
-                locationDetails: '221 4th St, SOMA, San Francisco. Paid parking nearby.',
-                tips: ['Great for kids 2-12', 'Create take-home movies', 'Less crowded weekday mornings', 'Combine with nearby museums']
+    eastmidlands: {
+        name: 'East Midlands, UK',
+        activities: {
+            'ART': {
+                'chill': [
+                    {
+                        name: 'Nottingham Contemporary',
+                        description: 'Modern art gallery in Nottingham city centre',
+                        duration: '2-3 hours',
+                        detailedDescription: 'Contemporary art gallery featuring cutting-edge exhibitions from international and local artists. The building itself is an architectural marvel in the heart of Nottingham\'s Cultural Quarter.',
+                        locationDetails: 'Weekday Cross, Nottingham NG1 2GB. City centre location, public transport accessible.',
+                        tips: ['Free admission to most exhibitions', 'Great café with local produce', 'Regular evening events and talks', 'Easy walk from Old Market Square']
+                    },
+                    {
+                        name: 'Nottingham Castle Museum & Art Gallery',
+                        description: 'Historic castle with art collections and city views',
+                        duration: '2-4 hours',
+                        detailedDescription: 'Explore the restored Nottingham Castle with its impressive art collections, medieval artifacts, and stunning views over the city. The castle sits on the original site where Robin Hood\'s adventures began.',
+                        locationDetails: 'Lenton Rd, Nottingham NG1 6EL. Castle Rock, city centre.',
+                        tips: ['Book tickets online in advance', 'Robin Hood gallery is a highlight', 'Spectacular views from the battlements', 'Castle café for traditional afternoon tea']
+                    }
+                ],
+                'moderate': [
+                    {
+                        name: 'Newark Castle & Town Art Trail',
+                        description: 'Historic castle ruins and town art exploration',
+                        duration: '3-4 hours',
+                        detailedDescription: 'Explore the impressive ruins of Newark Castle by the River Trent, then follow the town\'s heritage art trail discovering local galleries and street art.',
+                        locationDetails: 'Castle Gate, Newark-on-Trent NG24 1BG. 20 minutes from Nottingham by train.',
+                        tips: ['Free castle entry', 'Combine with antique shopping', 'Beautiful riverside walks', 'Regular historical reenactments']
+                    }
+                ]
             },
-            {
-                name: 'California Adventure Park',
-                description: 'Adventure-themed attractions in Santa Clara',
-                duration: '4-6 hours',
-                detailedDescription: 'Great America theme park with roller coasters, family rides, and seasonal events. Mix of thrill rides and gentler attractions.',
-                locationDetails: '4701 Great America Pkwy, Santa Clara. 1-hour drive from SF. Paid parking.',
-                tips: ['Check seasonal operating schedule', 'Buy tickets online for discounts', 'Very crowded on weekends', 'Bring sunscreen and water']
-            }
-        ],
-        'epic': [
-            {
-                name: 'Six Flags Discovery Kingdom',
-                description: 'Major theme park with world-class roller coasters',
-                duration: '8-10 hours',
-                detailedDescription: 'Full-scale theme park in Vallejo featuring intense roller coasters, animal shows, and water rides. Combines thrill rides with marine life presentations.',
-                locationDetails: '1001 Fairgrounds Dr, Vallejo. 1-hour drive from SF. Paid parking.',
-                tips: ['Full day commitment', 'Season passes often better value', 'Very crowded summer weekends', 'Bring change of clothes for water rides']
-            }
-        ]
-    },
-
-    'WALKS': {
-        'chill': [
-            {
-                name: 'Golden Gate Park Stroll',
-                description: 'Leisurely walk through iconic urban park',
-                duration: '1-3 hours',
-                detailedDescription: 'Easy exploration of Golden Gate Parks main attractions including Japanese Tea Garden, Conservatory of Flowers, and Stow Lake. Perfect for families.',
-                locationDetails: 'Multiple entrances throughout Golden Gate Park, SF. Paid parking at major attractions.',
-                tips: ['Rent bikes for faster exploration', 'Many attractions have entry fees', 'Great for picnics', 'Can be foggy in summer afternoons']
+            'ANIMALS': {
+                'chill': [
+                    {
+                        name: 'Attenborough Nature Reserve',
+                        description: 'Wildlife reserve with lakes and bird watching',
+                        duration: '2-3 hours',
+                        detailedDescription: 'Peaceful nature reserve named after Sir David Attenborough, featuring lakes, wetlands, and diverse wildlife. Perfect for bird watching, walking, and nature photography.',
+                        locationDetails: 'Barton Lane, Attenborough, Nottingham NG9 6DY. Free parking available.',
+                        tips: ['Bring binoculars for bird watching', 'Visitor centre has wildlife information', 'Several walking trail options', 'Great for family visits']
+                    },
+                    {
+                        name: 'White Post Farm',
+                        description: 'Family farm with animals and activities',
+                        duration: '3-4 hours',
+                        detailedDescription: 'Working farm with friendly animals, indoor and outdoor play areas, and seasonal activities. Meet sheep, goats, pigs, and smaller animals in a hands-on environment.',
+                        locationDetails: 'Farnsfield, Newark NG22 8HL. About 30 minutes from Nottingham.',
+                        tips: ['Great for families with young children', 'Seasonal events like lamb feeding', 'Indoor play areas for wet weather', 'Farm shop with local produce']
+                    }
+                ],
+                'moderate': [
+                    {
+                        name: 'Twycross Zoo',
+                        description: 'World-renowned primate zoo and conservation center',
+                        duration: '4-6 hours',
+                        detailedDescription: 'Home to over 500 animals including the world\'s largest collection of monkeys and apes. Conservation-focused zoo with educational programs and exciting animal encounters.',
+                        locationDetails: 'Burton Rd, Twycross, Atherstone CV9 3PX. About 45 minutes from Nottingham.',
+                        tips: ['Full day experience recommended', 'Primate collection is world-famous', 'Conservation talks throughout the day', 'Book online for discounts']
+                    }
+                ]
             },
-            {
-                name: 'Lake Merritt Loop',
-                description: 'Flat urban lake walk with city views',
-                duration: '1-2 hours',
-                detailedDescription: 'Easy 3.4-mile paved path around Oaklands jewel - Lake Merritt. Great for walking, jogging, or cycling with downtown views and bird life.',
-                locationDetails: 'Multiple access points around lake, Oakland. Street parking and paid lots available.',
-                tips: ['Completely flat and paved', 'Great for bird watching', 'Rent paddle boats or kayaks', 'Saturday farmers market nearby']
-            }
-        ],
-        'moderate': [
-            {
-                name: 'Lands End Coastal Trail',
-                description: 'Scenic waterfront walk with Golden Gate views',
-                duration: '2-3 hours',
-                detailedDescription: 'Mostly paved walking path along rugged coastline with stunning Golden Gate Bridge views, Marin Headlands, and Pacific Ocean. Passes historic Sutro Baths ruins.',
-                locationDetails: 'Start at Lands End Lookout, 680 Point Lobos Ave, SF. Free parking at visitor center.',
-                tips: ['Wear layers - very windy', 'Best views in morning light', 'Watch for high tides', 'Restrooms at Lands End Lookout']
+            'ADVENTURE': {
+                'moderate': [
+                    {
+                        name: 'Peak District National Park',
+                        description: 'Hiking and outdoor adventures in England\'s peaks',
+                        duration: '4-8 hours',
+                        detailedDescription: 'Explore the stunning landscapes of England\'s first national park. From gentle valley walks to challenging peak climbs, with charming villages and dramatic limestone formations.',
+                        locationDetails: 'Multiple access points, Bakewell and Matlock are popular bases. 45 minutes from Nottingham.',
+                        tips: ['Weather can change quickly', 'Bakewell tart is a local specialty', 'Chatsworth House nearby', 'OS maps recommended for serious hiking']
+                    },
+                    {
+                        name: 'Sherwood Forest & Major Oak',
+                        description: 'Legendary Robin Hood forest adventure',
+                        duration: '3-5 hours',
+                        detailedDescription: 'Walk through the legendary Sherwood Forest, home of Robin Hood. Visit the famous Major Oak, explore woodland trails, and discover the visitor centre with interactive exhibits.',
+                        locationDetails: 'Sherwood Forest Country Park, Edwinstowe, Mansfield NG21 9HN.',
+                        tips: ['Major Oak is over 1000 years old', 'Robin Hood festival in summer', 'Several walking trail options', 'Visitor centre has Robin Hood exhibitions']
+                    }
+                ],
+                'epic': [
+                    {
+                        name: 'Kinder Scout Plateau Hike',
+                        description: 'Challenging hike to Peak District\'s highest point',
+                        duration: '6-8 hours',
+                        detailedDescription: 'Epic hike to the highest point in the Peak District (636m). Historic route of the 1932 Mass Trespass, offering incredible views and a sense of achievement.',
+                        locationDetails: 'Start from Edale village, accessible by train from Sheffield/Manchester.',
+                        tips: ['Experienced hikers only', 'Can be boggy and challenging to navigate', 'Historic significance for walking rights', 'Weather can be severe - prepare well']
+                    }
+                ]
             },
-            {
-                name: 'Presidio Battery Trail',
-                description: 'Historic military site with bay views',
-                duration: '2-4 hours',
-                detailedDescription: 'Explore historic military batteries and bunkers with spectacular views of Golden Gate Bridge and San Francisco Bay. Rich military history and great photo opportunities.',
-                locationDetails: 'Multiple trailheads in Presidio, SF. Visitor center parking available.',
-                tips: ['Download Presidio app for history', 'Multiple difficulty levels available', 'Great for history buffs', 'Can be combined with Crissy Field']
-            }
-        ],
-        'epic': [
-            {
-                name: 'Mount Tamalpais Summit Hike',
-                description: 'Challenging hike to Bay Areas highest peak',
-                duration: '4-6 hours',
-                detailedDescription: 'Strenuous hike to 2,571-foot summit offering 360-degree views of entire Bay Area, Pacific Ocean, and on clear days, the Sierra Nevada mountains.',
-                locationDetails: 'Multiple trailheads in Marin. Pantoll parking area most popular. 45-minute drive from SF.',
-                tips: ['Start early to avoid crowds', 'Bring plenty of water', 'Check weather conditions', 'Can drive partway up if needed']
-            }
-        ]
-    },
-
-    'ADVENTURE': {
-        'moderate': [
-            {
-                name: 'Golden Gate Bridge Bike Ride',
-                description: 'Iconic bike ride across the famous bridge',
-                duration: '2-4 hours',
-                detailedDescription: 'Bike from San Francisco across Golden Gate Bridge to Sausalito, with option to take ferry back. Includes stunning views and photo opportunities.',
-                locationDetails: 'Start at Crissy Field or bike rental shops in Fishermans Wharf, SF.',
-                tips: ['Dress very warmly - extremely windy on bridge', 'Book bike rental in advance', 'Ferry back to SF available', 'Helmets required and provided']
+            'WALKS': {
+                'chill': [
+                    {
+                        name: 'Nottingham City Centre Historic Walk',
+                        description: 'Self-guided tour of Nottingham\'s historic sites',
+                        duration: '2-3 hours',
+                        detailedDescription: 'Discover Nottingham\'s rich history from the Lace Market to the Castle, taking in medieval churches, Victorian architecture, and Robin Hood connections.',
+                        locationDetails: 'Start at Old Market Square, Nottingham city centre.',
+                        tips: ['Pick up trail map from tourist information', 'Many free historic sites', 'Great pubs for breaks', 'Combine with shopping in city centre']
+                    },
+                    {
+                        name: 'Trent Valley Way',
+                        description: 'Scenic riverside walking along River Trent',
+                        duration: '2-4 hours',
+                        detailedDescription: 'Peaceful riverside walks along the River Trent with locks, bridges, and wildlife. Multiple access points allow for walks of varying lengths.',
+                        locationDetails: 'Multiple access points along River Trent, including Nottingham embankment.',
+                        tips: ['Flat, easy walking', 'Good for cycling too', 'Pubs and cafés along the route', 'Beautiful in all seasons']
+                    }
+                ],
+                'moderate': [
+                    {
+                        name: 'Dovedale Stepping Stones Walk',
+                        description: 'Famous Peak District valley walk with river crossing',
+                        duration: '3-4 hours',
+                        detailedDescription: 'One of England\'s most famous walks through a stunning limestone valley, featuring the iconic stepping stones across the River Dove.',
+                        locationDetails: 'Dovedale Car Park, near Ashbourne, Derbyshire. About 1 hour from Nottingham.',
+                        tips: ['Can be very busy on weekends', 'Stepping stones can be slippery', 'Extend walk to Milldale village', 'National Trust area - parking charges apply']
+                    }
+                ]
             },
-            {
-                name: 'Rock Climbing at Indian Rock',
-                description: 'Outdoor rock climbing in Berkeley Hills',
-                duration: '2-3 hours',
-                detailedDescription: 'Popular outdoor climbing spot with routes for beginners to advanced climbers. Great introduction to Bay Area rock climbing scene.',
-                locationDetails: 'Indian Rock Park, Berkeley Hills. Street parking available.',
-                tips: ['Bring your own gear or rent locally', 'Best for experienced climbers', 'Can be crowded on weekends', 'Check weather conditions']
-            }
-        ],
-        'epic': [
-            {
-                name: 'Alcatraz Island Tour',
-                description: 'Ferry to infamous former federal prison',
-                duration: '3-4 hours',
-                detailedDescription: 'Audio tour of the notorious former federal prison with stories from actual inmates and guards. Includes ferry ride with spectacular city views.',
-                locationDetails: 'Departs from Pier 33, San Francisco. Book tickets well in advance.',
-                tips: ['Book weeks or months ahead', 'Dress warmly - very windy on island', 'Audio tour is excellent', 'Night tours available seasonally']
+            'WATER': {
+                'chill': [
+                    {
+                        name: 'Colwick Country Park',
+                        description: 'Lake activities and riverside walks near Nottingham',
+                        duration: '2-3 hours',
+                        detailedDescription: 'Former gravel pits turned into beautiful lakes perfect for walking, fishing, and water sports. Adjacent to the River Trent with additional walking opportunities.',
+                        locationDetails: 'Colwick Park Rd, Nottingham NG4 2DW. Free parking.',
+                        tips: ['Great for fishing (permit required)', 'Rowing and sailing available', 'Good for dog walking', 'Café on site']
+                    }
+                ],
+                'moderate': [
+                    {
+                        name: 'National Water Sports Centre',
+                        description: 'Try sailing, kayaking, or paddleboarding',
+                        duration: '3-5 hours',
+                        detailedDescription: 'Premier water sports facility offering lessons and rentals for sailing, windsurfing, kayaking, and paddleboarding on purpose-built lakes.',
+                        locationDetails: 'Adbolton Lane, Holme Pierrepont, Nottingham NG12 2LU.',
+                        tips: ['Book activities in advance', 'All skill levels catered for', 'Equipment provided', 'Good changing facilities']
+                    }
+                ]
             },
-            {
-                name: 'Hang Gliding at Fort Funston',
-                description: 'Tandem hang gliding over Pacific Ocean',
-                duration: '3-5 hours',
-                detailedDescription: 'Tandem hang gliding flights over Pacific Ocean cliffs with certified instructors. Includes brief training and unforgettable aerial views.',
-                locationDetails: 'Fort Funston, San Francisco. Free parking available.',
-                tips: ['Weather dependent - call ahead', 'No experience necessary', 'Expensive but unforgettable', 'Bring warm clothes']
+            'THEME PARKS': {
+                'epic': [
+                    {
+                        name: 'Alton Towers',
+                        description: 'UK\'s premier theme park with world-class rides',
+                        duration: '8-10 hours',
+                        detailedDescription: 'Britain\'s most popular theme park featuring world-renowned roller coasters like The Smiler, Nemesis, and Oblivion, plus family attractions and beautiful gardens.',
+                        locationDetails: 'Alton, Staffordshire ST10 4DB. About 1 hour from Nottingham.',
+                        tips: ['Buy tickets online for big savings', 'Fast Track passes available', 'Very busy during school holidays', 'On-site hotels available']
+                    }
+                ]
             },
-            {
-                name: 'Shark Diving at Farallon Islands',
-                description: 'Cage diving with great white sharks',
-                duration: '8-12 hours',
-                detailedDescription: 'Full-day boat trip to Farallon Islands for cage diving with great white sharks. Includes all gear and marine biologist guides.',
-                locationDetails: 'Departs from various SF Bay marinas. Full-day commitment.',
-                tips: ['Season runs Sept-Nov', 'Must be comfortable swimming', 'Seasickness common - take medication', 'Book months in advance']
+            'SPORT': {
+                'moderate': [
+                    {
+                        name: 'Nottingham Forest Stadium Tour',
+                        description: 'Behind-the-scenes tour of historic football ground',
+                        duration: '1-2 hours',
+                        detailedDescription: 'Exclusive tour of the City Ground, home to Nottingham Forest FC, two-time European Cup winners. See the dressing rooms, tunnel, and learn about the club\'s incredible history.',
+                        locationDetails: 'The City Ground, Pavilion Rd, West Bridgford, Nottingham NG2 5FJ.',
+                        tips: ['Book tours in advance', 'Match day tours not available', 'Great for football fans', 'Club shop on site']
+                    },
+                    {
+                        name: 'Trent Bridge Cricket Ground',
+                        description: 'Historic cricket ground tours and matches',
+                        duration: '2-3 hours',
+                        detailedDescription: 'Tour one of England\'s most beautiful cricket grounds, home to Nottinghamshire CCC and international matches. Rich history and stunning pavilion.',
+                        locationDetails: 'West Bridgford, Nottingham NG2 6AG. Next to River Trent.',
+                        tips: ['Tours available on non-match days', 'Beautiful Victorian pavilion', 'Museum of cricket memorabilia', 'Riverside location']
+                    }
+                ]
             }
-        ]
-    },
-
-    'WATER': {
-        'chill': [
-            {
-                name: 'Stow Lake Pedal Boats',
-                description: 'Peaceful pedal boating in Golden Gate Park',
-                duration: '1-2 hours',
-                detailedDescription: 'Rent pedal boats on scenic Stow Lake surrounded by eucalyptus trees and parkland. Family-friendly activity with ducks and other waterfowl.',
-                locationDetails: 'Stow Lake, Golden Gate Park, SF. Paid parking nearby.',
-                tips: ['Boats rent by the hour', 'Great for families with kids', 'Can feed ducks (bring bread)', 'Open weather permitting']
-            },
-            {
-                name: 'Crissy Field Beach Walk',
-                description: 'Beach walking with Golden Gate Bridge views',
-                duration: '1-2 hours',
-                detailedDescription: 'Sandy beach walk along San Francisco Bay with incredible Golden Gate Bridge views. Popular with families, dog walkers, and photographers.',
-                locationDetails: 'Crissy Field, Presidio, SF. Free parking available.',
-                tips: ['Very windy - bring layers', 'Great for dogs (off-leash area)', 'Popular with kite flyers', 'Restrooms and snack bar available']
-            }
-        ],
-        'moderate': [
-            {
-                name: 'Kayaking on San Francisco Bay',
-                description: 'Guided kayak tours around the bay',
-                duration: '2-4 hours',
-                detailedDescription: 'Paddle around McCovey Cove, under Bay Bridge, or toward Alcatraz with guided tours. See the city from water level with possible sea lion encounters.',
-                locationDetails: 'Multiple launch points including AT&T Park and Sausalito.',
-                tips: ['No experience necessary', 'Dress for water and wind', 'Tours include all equipment', 'Book in advance']
-            },
-            {
-                name: 'Sailing on San Francisco Bay',
-                description: 'Learn to sail or join a sailing tour',
-                duration: '3-6 hours',
-                detailedDescription: 'Sailing lessons or skippered charters on San Francisco Bay. Experience sailing under Golden Gate Bridge with stunning city skyline views.',
-                locationDetails: 'Multiple marinas including Sausalito, SF Marina, and Berkeley.',
-                tips: ['Dress very warmly', 'Motion sickness possible', 'Some sailing experience helpful', 'Sunset sails very popular']
-            }
-        ],
-        'epic': [
-            {
-                name: 'Surfing at Ocean Beach',
-                description: 'Surf lessons at San Franciscos main beach',
-                duration: '4-6 hours',
-                detailedDescription: 'Learn to surf at Ocean Beach with wetsuit and board rentals. Cold water surfing experience with consistent waves year-round.',
-                locationDetails: 'Ocean Beach, San Francisco. Street parking available.',
-                tips: ['Very cold water - thick wetsuit required', 'Strong currents and sharks possible', 'Best for intermediate+ swimmers', 'Lessons recommended for beginners']
-            }
-        ]
-    },
-
-    'SPORT': {
-        'chill': [
-            {
-                name: 'Golden Gate Park Tennis',
-                description: 'Public tennis courts in scenic park setting',
-                duration: '1-2 hours',
-                detailedDescription: 'Multiple public tennis courts throughout Golden Gate Park. Courts available for drop-in play or reservations.',
-                locationDetails: 'Various locations in Golden Gate Park, SF. Some courts require fees.',
-                tips: ['Bring your own racket and balls', 'Courts can be busy on weekends', 'Some courts are free, others require payment', 'Check court conditions online']
-            },
-            {
-                name: 'Disc Golf at Golden Gate Park',
-                description: 'Free disc golf course through the park',
-                duration: '1-3 hours',
-                detailedDescription: '18-hole disc golf course winding through Golden Gate Park trees and meadows. Free to play, just bring discs.',
-                locationDetails: 'Course starts near Buffalo Paddock, Golden Gate Park, SF.',
-                tips: ['Bring your own discs or buy at nearby shops', 'Course map available online', 'Watch for pedestrians and cyclists', 'Can play year-round']
-            }
-        ],
-        'moderate': [
-            {
-                name: 'Giants Baseball Game',
-                description: 'Major League Baseball at Oracle Park',
-                duration: '3-4 hours',
-                detailedDescription: 'Catch a San Francisco Giants game at beautiful Oracle Park overlooking the bay. Known for garlic fries and unique ballpark features.',
-                locationDetails: 'Oracle Park, 24 Willie Mays Plaza, SF. Public transit recommended.',
-                tips: ['Buy tickets in advance for popular games', 'Garlic fries are must-try', 'Right field foul balls can land in bay', 'Stadium tours available on non-game days']
-            },
-            {
-                name: 'Warriors Basketball Game',
-                description: 'NBA basketball at Chase Center',
-                duration: '3-4 hours',
-                detailedDescription: 'Watch the Golden State Warriors play at state-of-the-art Chase Center. High-energy games with enthusiastic crowds.',
-                locationDetails: 'Chase Center, Mission Bay, SF. Limited parking, public transit recommended.',
-                tips: ['Tickets expensive for popular games', 'Arena has excellent food options', 'Very loud - consider ear protection', 'Arrive early to explore the venue']
-            }
-        ],
-        'epic': [
-            {
-                name: 'Bay to Breakers Race',
-                description: 'Iconic 12K race across San Francisco',
-                duration: '6-8 hours',
-                detailedDescription: 'Annual May footrace from bay to ocean with elaborate costumes and party atmosphere. More festival than serious race.',
-                locationDetails: 'Race starts downtown SF, ends at Ocean Beach. Occurs once yearly in May.',
-                tips: ['Register well in advance', 'Costumes encouraged and expected', 'Party atmosphere, not serious racing', 'Bring camera for amazing people watching']
-            }
-        ]
+        }
     }
 };
 
-
-// DOM Elements  
-const wheelContainer = document.getElementById('wheel-container');
-const wheelWrapper = document.getElementById('wheel-wrapper');
-const wheelSegments = document.getElementById('wheel-segments');
-const confettiDots = document.getElementById('confetti-dots');
-const activityResult = document.getElementById('activity-result');
-const activityTitle = document.getElementById('activity-title');
-const activityIcon = document.getElementById('activity-icon');
-const activityDescription = document.getElementById('activity-description');
-const activityDuration = document.getElementById('activity-duration');
-const tellMoreBtn = document.getElementById('tell-more-btn');
-const activityDetails = document.getElementById('activity-details');
-const detailedDescription = document.getElementById('detailed-description');
-const locationDetails = document.getElementById('location-details');
-const activityTips = document.getElementById('activity-tips');
-const confettiCanvas = document.getElementById('confetti-canvas');
-const categoryBadge = document.getElementById('category-badge');
-const ctaMessage = document.querySelector('.cta-message');
-const soundToggle = document.getElementById('sound-toggle');
-const soundIcon = document.getElementById('sound-icon');
-
-// State
+// Global variables
+let currentRegion = 'sf';
+let currentWheelData = [];
+let currentSelectedActivity = null;
+let wheelAngle = 0;
 let isSpinning = false;
-let currentRotation = 0;
-let currentActivity = null;
-let detailsVisible = false;
-let wheelSegmentElements = [];
-let soundEnabled = true; // Sound on by default
+let soundEnabled = true;
 
-// Audio context for sound effects
-let audioContext;
-let spinningSound;
+// Sound effects
+const spinSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1O/OeSEFJHfH8N2QQAoUXrTp65hVFApGn+DyvmwhBTV+0PLWdyMHJIHA7+OSRQ0PVqzn2Z5VEwxDm9+xw2wdCDqHy++hWBMEP');
 
-// Initialize audio
-function initAudio() {
-    try {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    } catch (e) {
-        console.log('Web Audio API not supported');
-    }
-}
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    initializeRegionSwitcher();
+    initializeWheel();
+    initializeSoundToggle();
+    updateRegionData(currentRegion);
+});
 
-// Create spinning sound using Web Audio API
-function createSpinningSound() {
-    if (!audioContext || !soundEnabled) return;
+// Region switcher functionality
+function initializeRegionSwitcher() {
+    const regionButtons = document.querySelectorAll('.region-btn');
     
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.type = 'sawtooth';
-    oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 3);
-    
-    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 3);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 3);
-    
-    return { oscillator, gainNode };
-}
-
-// Create celebration sound
-function playCelebrationSound() {
-    if (!audioContext || !soundEnabled) return;
-    
-    // Create a sequence of happy notes
-    const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-    const duration = 0.15;
-    
-    notes.forEach((frequency, index) => {
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime + index * duration);
-        
-        gainNode.gain.setValueAtTime(0, audioContext.currentTime + index * duration);
-        gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + index * duration + 0.01);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + index * duration + duration);
-        
-        oscillator.start(audioContext.currentTime + index * duration);
-        oscillator.stop(audioContext.currentTime + index * duration + duration);
+    regionButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const newRegion = this.dataset.region;
+            if (newRegion !== currentRegion) {
+                switchRegion(newRegion);
+            }
+        });
     });
 }
 
-// Create click sound for wheel interaction
-function playClickSound() {
-    if (!audioContext || !soundEnabled) return;
+function switchRegion(region) {
+    currentRegion = region;
     
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
+    // Update button states
+    document.querySelectorAll('.region-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`[data-region="${region}"]`).classList.add('active');
     
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+    // Update region data
+    updateRegionData(region);
     
-    oscillator.type = 'square';
-    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+    // Reset activity display
+    resetActivityDisplay();
     
-    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.1);
+    // Regenerate wheel
+    generateWheel();
 }
 
-// Toggle sound on/off
-function toggleSound() {
-    soundEnabled = !soundEnabled;
+function updateRegionData(region) {
+    const regionData = regionsData[region];
     
-    // Update icon and styling
-    if (soundEnabled) {
-        soundIcon.textContent = '🔊';
-        soundToggle.classList.remove('muted');
-        soundToggle.title = 'Sound On - Click to Mute';
-    } else {
-        soundIcon.textContent = '🔇';
-        soundToggle.classList.add('muted');
-        soundToggle.title = 'Sound Off - Click to Enable';
-        
-        // Stop any currently playing spinning sound
-        if (spinningSound && spinningSound.oscillator) {
-            try {
-                spinningSound.oscillator.stop();
-            } catch (e) {
-                // Sound may have already stopped
-            }
-        }
-    }
+    // Update header text
+    document.getElementById('location-title').textContent = regionData.name;
     
-    // Store preference in localStorage
-    localStorage.setItem('adventurePickerSoundEnabled', soundEnabled.toString());
+    // Switch illustrations
+    document.querySelectorAll('.region-illustration').forEach(illustration => {
+        illustration.style.display = 'none';
+    });
+    document.getElementById(`${region}-illustration`).style.display = 'block';
+    
+    // Store current region activities for later selection
+    currentWheelData = regionData.activities;
+    
+    console.log(`Updated to ${regionData.name}`);
 }
 
-// Load sound preference from localStorage
-function loadSoundPreference() {
-    const saved = localStorage.getItem('adventurePickerSoundEnabled');
-    if (saved !== null) {
-        soundEnabled = saved === 'true';
-        if (!soundEnabled) {
-            soundIcon.textContent = '🔇';
-            soundToggle.classList.add('muted');
-            soundToggle.title = 'Sound Off - Click to Enable';
-        }
-    }
-}
-
-// Physics configuration
-const spinConfig = {
-    minSpinTime: 2500,
-    maxSpinTime: 4500,
-    friction: 0.994,
-    minVelocity: 0.3
-};
-
-// Confetti system
-class ConfettiSystem {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-        this.particles = [];
-        this.colors = ['#e67e22', '#3498db', '#e74c3c', '#2ecc71', '#f39c12'];
-        
-        this.resizeCanvas();
-        window.addEventListener('resize', () => this.resizeCanvas());
-    }
-    
-    resizeCanvas() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-    }
-    
-    createParticle(x, y) {
-        return {
-            x: x,
-            y: y,
-            vx: (Math.random() - 0.5) * 12,
-            vy: -Math.random() * 12 - 3,
-            color: this.colors[Math.floor(Math.random() * this.colors.length)],
-            size: Math.random() * 8 + 4,
-            life: 1.0,
-            decay: Math.random() * 0.02 + 0.01
-        };
-    }
-    
-    explode(x, y, count = 40) {
-        for (let i = 0; i < count; i++) {
-            this.particles.push(this.createParticle(x, y));
-        }
-        this.animate();
-    }
-    
-    animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
-        for (let i = this.particles.length - 1; i >= 0; i--) {
-            const p = this.particles[i];
+function resetActivityDisplay() {
+    document.getElementById('activity-result').innerHTML = `
+        <div class="activity-card">
+            <div class="category-badge" id="category-badge" style="display: none;">ART</div>
+            <a id="google-search-link" class="google-search-link" href="#" target="_blank" style="display: none;">
+                🔍 Learn More
+            </a>
+            <h3 id="activity-title" class="activity-title">Ready for an Adventure?</h3>
+            <div class="activity-icon" id="activity-icon">🎯</div>
+            <p id="activity-description" class="activity-description">Discover amazing activities across the ${regionsData[currentRegion].name}! From art walks to water sports, there's something exciting waiting for you.</p>
+            <p id="activity-duration" class="activity-duration"></p>
             
-            p.x += p.vx;
-            p.y += p.vy;
-            p.vy += 0.4;
-            p.vx *= 0.99;
-            p.life -= p.decay;
+            <button id="tell-more-btn" class="tell-more-btn" style="display: none;">Tell me more</button>
             
-            this.ctx.save();
-            this.ctx.globalAlpha = p.life;
-            this.ctx.fillStyle = p.color;
-            this.ctx.beginPath();
-            this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            this.ctx.fill();
-            this.ctx.restore();
+            <div class="cta-message">
+                <p class="cta-text">👈 Spin the Wheel to choose your adventure!</p>
+            </div>
             
-            if (p.life <= 0 || p.y > this.canvas.height + 50) {
-                this.particles.splice(i, 1);
-            }
-        }
-        
-        if (this.particles.length > 0) {
-            requestAnimationFrame(() => this.animate());
-        }
-    }
+            <!-- Additional details (hidden initially) -->
+            <div class="activity-details" id="activity-details" style="display: none;">
+                <div class="activity-icons-row">
+                    <div class="detail-icon">📍</div>
+                    <div class="detail-icon">🧭</div>
+                </div>
+                <p id="detailed-description" class="detailed-description"></p>
+                <div class="location-details" id="location-details"></div>
+                <ul id="activity-tips" class="activity-tips"></ul>
+            </div>
+        </div>
+    `;
+    
+    // Re-attach event listener for "Tell me more" button
+    document.getElementById('tell-more-btn').addEventListener('click', showActivityDetails);
 }
 
-const confetti = new ConfettiSystem(confettiCanvas);
-
-// Generate wheel segments
+// Wheel generation and animation
 function generateWheel() {
-    wheelSegments.innerHTML = '';
-    wheelSegmentElements = [];
+    const wheel = document.getElementById('wheel-segments');
+    wheel.innerHTML = '';
     
     const segmentAngle = 360 / activityCategories.length;
-    const radius = 180; // Adjusted radius for better fit
-    const centerX = 200; // Center coordinates
-    const centerY = 200;
     
     activityCategories.forEach((category, index) => {
+        const segment = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        
         const startAngle = index * segmentAngle;
-        const endAngle = (index + 1) * segmentAngle;
-        const color = category.color;
+        const endAngle = startAngle + segmentAngle;
         
-        // Create segment path
-        const startAngleRad = (startAngle - 90) * Math.PI / 180;
-        const endAngleRad = (endAngle - 90) * Math.PI / 180;
-        
-        const x1 = centerX + radius * Math.cos(startAngleRad);
-        const y1 = centerY + radius * Math.sin(startAngleRad);
-        const x2 = centerX + radius * Math.cos(endAngleRad);
-        const y2 = centerY + radius * Math.sin(endAngleRad);
-        
-        const largeArcFlag = segmentAngle > 180 ? 1 : 0;
-        
-        const pathData = [
-            `M ${centerX} ${centerY}`,
-            `L ${x1} ${y1}`,
-            `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-            'Z'
-        ].join(' ');
-        
-        // Create segment
-        const segment = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        segment.setAttribute('d', pathData);
-        segment.setAttribute('fill', color);
-        segment.setAttribute('stroke', '#2c3e50');
-        segment.setAttribute('stroke-width', '3');
-        segment.style.filter = 'drop-shadow(3px 3px 6px rgba(0,0,0,0.3))';
-        segment.dataset.categoryIndex = index;
-        segment.dataset.categoryName = category.name;
-        
-        wheelSegments.appendChild(segment);
-        wheelSegmentElements.push(segment);
+        // Create path for segment
+        const pathData = createWheelSegmentPath(200, 200, 170, startAngle, endAngle);
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathData);
+        path.setAttribute('fill', category.color);
+        path.setAttribute('fill-opacity', '0.8');
+        path.setAttribute('stroke', '#4a4034');
+        path.setAttribute('stroke-width', '2');
+        path.setAttribute('filter', 'url(#watercolor-texture)');
         
         // Add text
         const textAngle = startAngle + segmentAngle / 2;
-        const textAngleRad = (textAngle - 90) * Math.PI / 180;
-        const textRadius = radius * 0.65;
-        const textX = centerX + textRadius * Math.cos(textAngleRad);
-        const textY = centerY + textRadius * Math.sin(textAngleRad);
+        const textRadius = 130;
+        const textX = 200 + Math.cos((textAngle - 90) * Math.PI / 180) * textRadius;
+        const textY = 200 + Math.sin((textAngle - 90) * Math.PI / 180) * textRadius;
         
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', textX);
@@ -639,263 +556,221 @@ function generateWheel() {
         text.setAttribute('text-anchor', 'middle');
         text.setAttribute('dominant-baseline', 'middle');
         text.setAttribute('fill', 'white');
-        text.setAttribute('font-family', 'Arial, sans-serif');
+        text.setAttribute('font-family', 'Kalam');
+        text.setAttribute('font-size', '14');
         text.setAttribute('font-weight', 'bold');
-        text.setAttribute('font-size', '14'); // Larger, more readable text
-        text.setAttribute('transform', `rotate(${textAngle}, ${textX}, ${textY})`);
-        text.style.textShadow = '2px 2px 4px rgba(0,0,0,0.8)';
+        text.setAttribute('transform', `rotate(${textAngle > 90 && textAngle < 270 ? textAngle + 180 : textAngle}, ${textX}, ${textY})`);
+        
         text.textContent = category.name;
         
-        wheelSegments.appendChild(text);
+        segment.appendChild(path);
+        segment.appendChild(text);
+        wheel.appendChild(segment);
     });
 }
 
-// Spin wheel with physics
-function spinWheel() {
-    if (isSpinning) return;
+function createWheelSegmentPath(centerX, centerY, radius, startAngle, endAngle) {
+    const startAngleRad = (startAngle - 90) * Math.PI / 180;
+    const endAngleRad = (endAngle - 90) * Math.PI / 180;
     
-    // Initialize audio context on first user interaction
-    if (!audioContext) {
-        initAudio();
-    }
+    const x1 = centerX + radius * Math.cos(startAngleRad);
+    const y1 = centerY + radius * Math.sin(startAngleRad);
+    const x2 = centerX + radius * Math.cos(endAngleRad);
+    const y2 = centerY + radius * Math.sin(endAngleRad);
+    
+    const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+    
+    return `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2} Z`;
+}
+
+function initializeWheel() {
+    const wheelContainer = document.getElementById('wheel-container');
+    wheelContainer.addEventListener('click', spinWheel);
+    
+    generateWheel();
+}
+
+function spinWheel() {
+    if (isSpinning || !currentWheelData) return;
     
     isSpinning = true;
     
-    // Play click sound immediately
-    playClickSound();
-    
-    // Play spinning sound
-    setTimeout(() => {
-        spinningSound = createSpinningSound();
-    }, 100);
-    
-    const spinDuration = Math.random() * (spinConfig.maxSpinTime - spinConfig.minSpinTime) + spinConfig.minSpinTime;
-    const finalRotation = Math.random() * 360 + 1440 + currentRotation; // At least 4 full rotations
-    
-    let startTime = Date.now();
-    let initialVelocity = (finalRotation - currentRotation) / spinDuration * 16.67;
-    let velocity = initialVelocity;
-    let rotation = currentRotation;
-    
-    function animate() {
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / spinDuration, 1);
-        
-        velocity *= spinConfig.friction;
-        rotation += velocity;
-        
-        wheelWrapper.style.transform = `rotate(${rotation}deg)`;
-        
-        if (progress < 1 && velocity > spinConfig.minVelocity) {
-            requestAnimationFrame(animate);
-        } else {
-            currentRotation = rotation % 360;
-            finishSpin();
-        }
+    if (soundEnabled) {
+        spinSound.currentTime = 0;
+        spinSound.play().catch(e => console.log('Sound play failed:', e));
     }
     
-    animate();
-    createConfettiDots();
-}
-
-// Create confetti dots around wheel
-function createConfettiDots() {
-    const colors = ['#e67e22', '#3498db', '#e74c3c', '#2ecc71', '#f39c12'];
+    // Generate random spin
+    const minSpins = 5;
+    const maxSpins = 8;
+    const spins = Math.random() * (maxSpins - minSpins) + minSpins;
+    const finalAngle = spins * 360 + Math.random() * 360;
     
-    for (let i = 0; i < 20; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'confetti-dot';
-        dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        dot.style.left = Math.random() * 100 + '%';
-        dot.style.top = Math.random() * 100 + '%';
-        confettiDots.appendChild(dot);
-        
-        setTimeout(() => {
-            if (dot.parentNode) {
-                dot.parentNode.removeChild(dot);
-            }
-        }, 2000);
-    }
-}
-
-// Finish spin and show result
-function finishSpin() {
-    isSpinning = false;
+    wheelAngle += finalAngle;
     
-    // Calculate selected category - pointer points up, so we need to account for that
-    const normalizedRotation = (360 - (currentRotation % 360)) % 360;
-    const segmentAngle = 360 / activityCategories.length;
-    const selectedIndex = Math.floor(normalizedRotation / segmentAngle) % activityCategories.length;
-    const selectedCategory = activityCategories[selectedIndex];
+    const wheel = document.getElementById('adventure-wheel');
+    wheel.style.transition = 'transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    wheel.style.transform = `rotate(${wheelAngle}deg)`;
     
-    // Debug logging
-    console.log('Wheel stopped at rotation:', currentRotation);
-    console.log('Normalized rotation:', normalizedRotation);
-    console.log('Selected index:', selectedIndex);
-    console.log('Selected category:', selectedCategory.name);
-    
-    // Highlight selected segment
-    highlightSelectedSegment(selectedIndex);
-    
-    // Play celebration sound
-    playCelebrationSound();
-    
-    // Trigger confetti explosion
-    const wheelRect = wheelWrapper.getBoundingClientRect();
-    const centerX = wheelRect.left + wheelRect.width / 2;
-    const centerY = wheelRect.top + wheelRect.height / 2;
-    
-    // Multiple confetti bursts for more celebration
-    confetti.explode(centerX, centerY, 80);
-    setTimeout(() => confetti.explode(centerX - 50, centerY - 30, 40), 200);
-    setTimeout(() => confetti.explode(centerX + 50, centerY - 30, 40), 400);
-    
-    // Show activity after delay
+    // Calculate result
     setTimeout(() => {
-        showActivityFromCategory(selectedCategory.name);
-    }, 800);
+        const normalizedAngle = (360 - (wheelAngle % 360)) % 360;
+        const segmentAngle = 360 / activityCategories.length;
+        const selectedIndex = Math.floor(normalizedAngle / segmentAngle);
+        const selectedCategory = activityCategories[selectedIndex];
+        
+        // Select random activity from the selected category
+        const selectedActivity = selectRandomActivityFromCategory(selectedCategory.name);
+        
+        showActivityResult(selectedActivity);
+        isSpinning = false;
+        
+        // Add confetti effect
+        createConfetti();
+    }, 3000);
 }
 
-// Highlight the selected segment
-function highlightSelectedSegment(selectedIndex) {
-    // Reset all segments to normal
-    wheelSegmentElements.forEach(segment => {
-        segment.setAttribute('stroke-width', '3');
-        segment.setAttribute('stroke', '#2c3e50');
-        segment.style.filter = 'drop-shadow(3px 3px 6px rgba(0,0,0,0.3))';
+function selectRandomActivityFromCategory(categoryName) {
+    const categoryActivities = currentWheelData[categoryName];
+    if (!categoryActivities) {
+        console.error(`No activities found for category: ${categoryName}`);
+        return null;
+    }
+    
+    // Get all activities from all difficulty levels in this category
+    const allActivities = [];
+    Object.keys(categoryActivities).forEach(difficulty => {
+        categoryActivities[difficulty].forEach(activity => {
+            allActivities.push({
+                ...activity,
+                category: categoryName,
+                difficulty: difficulty
+            });
+        });
     });
     
-    // Highlight selected segment
-    if (wheelSegmentElements[selectedIndex]) {
-        const selectedSegment = wheelSegmentElements[selectedIndex];
-        selectedSegment.setAttribute('stroke-width', '6');
-        selectedSegment.setAttribute('stroke', '#e74c3c');
-        selectedSegment.style.filter = 'drop-shadow(3px 3px 10px rgba(231, 76, 60, 0.6))';
+    if (allActivities.length === 0) {
+        console.error(`No activities found in category: ${categoryName}`);
+        return null;
     }
+    
+    // Select random activity
+    const randomIndex = Math.floor(Math.random() * allActivities.length);
+    return allActivities[randomIndex];
 }
 
-
-// Show random activity from selected category, considering difficulty
-function showActivityFromCategory(categoryName) {
-    const categoryData = bayAreaActivities[categoryName];
-    if (!categoryData) {
-        showFallbackActivity(categoryName);
-        return;
-    }
+function showActivityResult(activity) {
+    currentSelectedActivity = activity;
     
-    // Get random difficulty level that has activities
-    const availableDifficulties = Object.keys(categoryData).filter(diff => categoryData[diff].length > 0);
-    if (availableDifficulties.length === 0) {
-        showFallbackActivity(categoryName);
-        return;
-    }
+    // Update UI elements
+    const categoryBadge = document.getElementById('category-badge');
+    const activityTitle = document.getElementById('activity-title');
+    const activityIcon = document.getElementById('activity-icon');
+    const activityDescription = document.getElementById('activity-description');
+    const activityDuration = document.getElementById('activity-duration');
+    const tellMoreBtn = document.getElementById('tell-more-btn');
+    const googleSearchLink = document.getElementById('google-search-link');
     
-    const randomDifficulty = availableDifficulties[Math.floor(Math.random() * availableDifficulties.length)];
-    const activities = categoryData[randomDifficulty];
-    const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+    // Show and populate category badge
+    categoryBadge.textContent = activity.category;
+    categoryBadge.style.display = 'inline-block';
     
-    currentActivity = randomActivity;
+    // Create Google search URL
+    const searchQuery = `${activity.name} ${regionsData[currentRegion].name}`;
+    const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+    googleSearchLink.href = googleUrl;
+    googleSearchLink.style.display = 'block';
     
-    // Get category icon
-    const categoryIcons = {
+    // Set activity details
+    activityTitle.textContent = activity.name;
+    activityDescription.textContent = activity.description;
+    activityDuration.textContent = activity.duration;
+    
+    // Set appropriate icon based on category
+    const iconMap = {
         'ART': '🎨',
         'ANIMALS': '🦁',
         'THEME PARKS': '🎢',
-        'WALKS': '🚶',
+        'WALKS': '🚶‍♀️',
         'ADVENTURE': '🏔️',
         'WATER': '🌊',
         'SPORT': '⚽'
     };
+    activityIcon.textContent = iconMap[activity.category] || '🎯';
     
-    // Hide CTA message and show activity elements
-    ctaMessage.style.display = 'none';
-    categoryBadge.style.display = 'inline-block';
+    // Show tell more button
     tellMoreBtn.style.display = 'inline-block';
     
-    // Update activity card
-    categoryBadge.textContent = categoryName;
-    activityTitle.textContent = randomActivity.name;
-    activityIcon.textContent = categoryIcons[categoryName] || '🎯';
-    activityDescription.textContent = randomActivity.description;
-    activityDuration.textContent = `Estimated ${randomActivity.duration}`;
-    
-    // Reset details state
-    detailsVisible = false;
-    activityDetails.style.display = 'none';
-    tellMoreBtn.textContent = 'Tell me more';
-    
-    // Show result
-    activityResult.style.display = 'block';
+    // Hide CTA message
+    document.querySelector('.cta-message').style.display = 'none';
 }
 
-// Show fallback when no activities found
-function showFallbackActivity(categoryName) {
-    const categoryIcons = {
-        'ART': '🎨', 'ANIMALS': '🦁', 'THEME PARKS': '🎢', 'WALKS': '🚶',
-        'ADVENTURE': '🏔️', 'WATER': '🌊', 'SPORT': '⚽'
-    };
+function showActivityDetails() {
+    if (!currentSelectedActivity) return;
     
-    // Hide CTA message and show activity elements
-    ctaMessage.style.display = 'none';
-    categoryBadge.style.display = 'inline-block';
-    tellMoreBtn.style.display = 'none'; // No "tell me more" for fallback
+    const activity = currentSelectedActivity;
+    const detailsSection = document.getElementById('activity-details');
+    const detailedDescription = document.getElementById('detailed-description');
+    const locationDetails = document.getElementById('location-details');
+    const activityTips = document.getElementById('activity-tips');
     
-    categoryBadge.textContent = categoryName;
-    activityTitle.textContent = 'Coming Soon!';
-    activityIcon.textContent = categoryIcons[categoryName] || '🎯';
-    activityDescription.textContent = `We're still building our ${categoryName.toLowerCase()} database. Try another spin!`;
-    activityDuration.textContent = '';
+    // Populate detailed information
+    detailedDescription.textContent = activity.detailedDescription || activity.description;
+    locationDetails.textContent = activity.locationDetails || 'Location details not available.';
     
-    detailsVisible = false;
-    activityDetails.style.display = 'none';
-    tellMoreBtn.textContent = 'Tell me more';
-    
-    activityResult.style.display = 'block';
-}
-
-// Toggle activity details
-function toggleDetails() {
-    if (!currentActivity) return;
-    
-    if (!detailsVisible) {
-        // Show details
-        detailedDescription.textContent = currentActivity.detailedDescription;
-        locationDetails.textContent = currentActivity.locationDetails;
-        
-        activityTips.innerHTML = '';
-        currentActivity.tips.forEach(tip => {
+    // Clear and populate tips
+    activityTips.innerHTML = '';
+    if (activity.tips && activity.tips.length > 0) {
+        activity.tips.forEach(tip => {
             const li = document.createElement('li');
             li.textContent = tip;
             activityTips.appendChild(li);
         });
-        
-        activityDetails.style.display = 'block';
-        tellMoreBtn.textContent = 'Show less';
-        detailsVisible = true;
+    }
+    
+    // Show details section
+    detailsSection.style.display = 'block';
+    
+    // Scroll to details
+    detailsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// Sound toggle functionality
+function initializeSoundToggle() {
+    const soundToggle = document.getElementById('sound-toggle');
+    soundToggle.addEventListener('click', toggleSound);
+}
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    const soundIcon = document.getElementById('sound-icon');
+    const soundToggle = document.getElementById('sound-toggle');
+    
+    if (soundEnabled) {
+        soundIcon.textContent = '🔊';
+        soundToggle.classList.remove('muted');
     } else {
-        // Hide details
-        activityDetails.style.display = 'none';
-        tellMoreBtn.textContent = 'Tell me more';
-        detailsVisible = false;
+        soundIcon.textContent = '🔇';
+        soundToggle.classList.add('muted');
     }
 }
 
-// Event listeners
-wheelContainer.addEventListener('click', () => {
-    spinWheel();
-});
-
-// Add visual feedback for clickability
-wheelContainer.style.cursor = 'pointer';
-
-soundToggle.addEventListener('click', toggleSound);
-
-tellMoreBtn.addEventListener('click', toggleDetails);
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    loadSoundPreference();
-    generateWheel();
+// Confetti effect
+function createConfetti() {
+    const colors = ['#d4956a', '#7ba3c4', '#e0bb59', '#a68da0'];
+    const confettiContainer = document.getElementById('confetti-dots');
     
-    // Activity card starts with welcome message - no need to show initial activity
-});
+    for (let i = 0; i < 20; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti-dot';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.animationDelay = Math.random() * 1000 + 'ms';
+        
+        confettiContainer.appendChild(confetti);
+        
+        setTimeout(() => {
+            confetti.remove();
+        }, 2000);
+    }
+}
