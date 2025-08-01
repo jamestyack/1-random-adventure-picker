@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Adventure Picker - Breaking the Same-Place Rut</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+    
+    <div class="container">
+        <!-- Header matching mockup -->
+        <header class="mockup-header">
+            <h1 class="breaking-title">BREAKING THE SAME-PLACE RUT</h1>
+            <h2 class="main-title">RANDOM<br>ADVENTURE PICKER</h2>
+            <h3 class="location-title-header">San Francisco Bay Area</h3>
+            
+            <!-- Sound Toggle -->
+            <button id="sound-toggle" class="sound-toggle" title="Toggle Sound">
+                <span id="sound-icon">🔊</span>
+            </button>
+        </header>
+
+        <main class="mockup-layout">
+            <!-- Left side: Spinning Wheel -->
+            <div class="left-panel">
+                <div class="wheel-section">
+                    <div class="confetti-dots" id="confetti-dots"></div>
+                    
+                    <div class="wheel-container" id="wheel-container">
+                        <!-- Arrow Pointer -->
+                        <div class="wheel-pointer">
+                            <svg viewBox="0 0 40 60">
+                                <path d="M20,5 L35,25 L20,45 L5,25 Z" fill="#e67e22" stroke="#d35400" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        
+                        <!-- Spinning Wheel -->
+                        <div class="wheel-wrapper" id="wheel-wrapper">
+                            <svg id="adventure-wheel" class="spinning-wheel" viewBox="0 0 400 400">
+                                <g id="wheel-segments"></g>
+                                <!-- Center -->
+                                <circle cx="200" cy="200" r="30" fill="#2c3e50" stroke="#34495e" stroke-width="3"/>
+                                <text x="200" y="208" text-anchor="middle" fill="white" font-family="Caveat" font-size="16" font-weight="bold">SPIN</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right side: Activity Result -->
+            <div class="right-panel">
+                <!-- Activity Result -->
+                <div class="activity-result" id="activity-result">
+                    <div class="activity-card">
+                        <div class="category-badge" id="category-badge" style="display: none;">ART</div>
+                        <h3 id="activity-title" class="activity-title">Ready for an Adventure?</h3>
+                        <div class="activity-icon" id="activity-icon">🎯</div>
+                        <p id="activity-description" class="activity-description">Discover amazing activities across the San Francisco Bay Area! From art walks to water sports, there's something exciting waiting for you.</p>
+                        <p id="activity-duration" class="activity-duration"></p>
+                        
+                        <button id="tell-more-btn" class="tell-more-btn" style="display: none;">Tell me more</button>
+                        
+                        <div class="cta-message">
+                            <p class="cta-text">👈 Spin the Wheel to choose your adventure!</p>
+                        </div>
+                        
+                        <!-- Additional details (hidden initially) -->
+                        <div class="activity-details" id="activity-details" style="display: none;">
+                            <div class="activity-icons-row">
+                                <div class="detail-icon">📍</div>
+                                <div class="detail-icon">🧭</div>
+                            </div>
+                            <p id="detailed-description" class="detailed-description"></p>
+                            <div class="location-details" id="location-details"></div>
+                            <ul id="activity-tips" class="activity-tips"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
