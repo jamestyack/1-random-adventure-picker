@@ -4,6 +4,10 @@ Break out of your same-place rut! Discover amazing activities across the San Fra
 
 ![Adventure Picker Demo](https://img.shields.io/badge/Status-Ready%20to%20Spin-brightgreen)
 
+## 🌐 Live Demo
+
+**Try it now:** [https://jamestyack.github.io/1-random-adventure-picker/](https://jamestyack.github.io/1-random-adventure-picker/)
+
 ## 🎯 Features
 
 - **Interactive Spinning Wheel**: Physics-based wheel with realistic momentum and friction
