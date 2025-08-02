@@ -2,6 +2,10 @@
 
 Breaking the same-place rut with a fun spinning wheel that discovers amazing activities across the San Francisco Bay Area!
 
+## 🌐 Live Demo
+
+**Try it now:** [https://jamestyack.github.io/1-random-adventure-picker/](https://jamestyack.github.io/1-random-adventure-picker/)
+
 ## ✨ Features
 
 ### 🎪 Interactive Spinning Wheel
