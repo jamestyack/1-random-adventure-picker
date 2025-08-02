@@ -2,13 +2,13 @@
 
 // Activity Categories for Bay Area Adventures
 const activityCategories = [
-    { name: 'ART', color: '#e67e22' },
-    { name: 'ANIMALS', color: '#3498db' },
-    { name: 'THEME PARKS', color: '#e67e22' },
-    { name: 'WALKS', color: '#3498db' },
-    { name: 'ADVENTURE', color: '#e67e22' },
-    { name: 'WATER', color: '#3498db' },
-    { name: 'SPORT', color: '#e67e22' }
+    { name: 'ART', color: '#D4A574' },        // Washed out orange/peach
+    { name: 'ANIMALS', color: '#7DB46C' },    // Washed out green
+    { name: 'THEME PARKS', color: '#E85A8F' }, // Washed out pink/magenta
+    { name: 'WALKS', color: '#6B9BD4' },      // Washed out blue
+    { name: 'ADVENTURE', color: '#C47B7B' },  // Washed out red/rust
+    { name: 'WATER', color: '#6DC4D6' },      // Washed out teal/cyan
+    { name: 'SPORT', color: '#B89BD9' }       // Washed out purple
 ];
 
 // Bay Area Activities Database organized by category and difficulty
@@ -368,6 +368,7 @@ const categoryBadge = document.getElementById('category-badge');
 const ctaMessage = document.querySelector('.cta-message');
 const soundToggle = document.getElementById('sound-toggle');
 const soundIcon = document.getElementById('sound-icon');
+const googleSearchBtn = document.getElementById('google-search-btn');
 
 // State
 let isSpinning = false;
@@ -810,10 +811,18 @@ function showActivityFromCategory(categoryName) {
     // Hide CTA message and show activity elements
     ctaMessage.style.display = 'none';
     categoryBadge.style.display = 'inline-block';
+    googleSearchBtn.style.display = 'inline-block';
     tellMoreBtn.style.display = 'inline-block';
     
     // Update activity card
     categoryBadge.textContent = categoryName;
+    
+    // Set badge color to match wheel segment
+    const categoryInfo = activityCategories.find(cat => cat.name === categoryName);
+    if (categoryInfo) {
+        categoryBadge.style.backgroundColor = categoryInfo.color;
+    }
+    
     activityTitle.textContent = randomActivity.name;
     activityIcon.textContent = categoryIcons[categoryName] || '🎯';
     activityDescription.textContent = randomActivity.description;
@@ -838,9 +847,17 @@ function showFallbackActivity(categoryName) {
     // Hide CTA message and show activity elements
     ctaMessage.style.display = 'none';
     categoryBadge.style.display = 'inline-block';
+    googleSearchBtn.style.display = 'none'; // No Google search for fallback
     tellMoreBtn.style.display = 'none'; // No "tell me more" for fallback
     
     categoryBadge.textContent = categoryName;
+    
+    // Set badge color to match wheel segment
+    const categoryInfo = activityCategories.find(cat => cat.name === categoryName);
+    if (categoryInfo) {
+        categoryBadge.style.backgroundColor = categoryInfo.color;
+    }
+    
     activityTitle.textContent = 'Coming Soon!';
     activityIcon.textContent = categoryIcons[categoryName] || '🎯';
     activityDescription.textContent = `We're still building our ${categoryName.toLowerCase()} database. Try another spin!`;
@@ -880,6 +897,18 @@ function toggleDetails() {
     }
 }
 
+// Google search function
+function searchActivityOnGoogle() {
+    if (!currentActivity) return;
+    
+    // Create search query with activity name and San Francisco Bay Area
+    const searchQuery = `${currentActivity.name} San Francisco Bay Area`;
+    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+    
+    // Open in new window/tab
+    window.open(googleSearchUrl, '_blank');
+}
+
 // Event listeners
 wheelContainer.addEventListener('click', () => {
     spinWheel();
@@ -889,6 +918,8 @@ wheelContainer.addEventListener('click', () => {
 wheelContainer.style.cursor = 'pointer';
 
 soundToggle.addEventListener('click', toggleSound);
+
+googleSearchBtn.addEventListener('click', searchActivityOnGoogle);
 
 tellMoreBtn.addEventListener('click', toggleDetails);
 
