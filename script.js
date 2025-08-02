@@ -30,6 +30,30 @@ const bayAreaActivities = {
                 detailedDescription: 'World-class museum featuring American art, contemporary works, and rotating exhibitions. The observation tower offers panoramic city views.',
                 locationDetails: '50 Hagiwara Tea Garden Dr, Golden Gate Park, SF. Paid parking available.',
                 tips: ['Free tower views with admission', 'First Tuesday free for SF residents', 'Combine with Japanese Tea Garden visit', 'Museum store has unique gifts']
+            },
+            {
+                name: 'Sausalito Art Galleries',
+                description: 'Charming waterfront town with numerous art galleries',
+                duration: '2-3 hours',
+                detailedDescription: 'Stroll through picturesque Sausalito and explore local art galleries featuring Bay Area artists, maritime art, and contemporary works. Beautiful harbor views included.',
+                locationDetails: 'Downtown Sausalito, 20 minutes north via Golden Gate Bridge. Ferry also available.',
+                tips: ['Combine with ferry ride for scenic approach', 'Many galleries within walking distance', 'Great restaurants for lunch breaks', 'Free street parking limited']
+            },
+            {
+                name: 'Palo Alto Art Center',
+                description: 'Community art center with rotating exhibitions',
+                duration: '1-2 hours',
+                detailedDescription: 'Local art center featuring contemporary works by Peninsula artists, ceramics, and community art projects. Often has hands-on workshops available.',
+                locationDetails: '1313 Newell Rd, Palo Alto. 45 minutes south on 101. Free parking.',
+                tips: ['Always free admission', 'Check workshop schedule online', 'Adjacent to Mitchell Park playground', 'Easy CalTrain access from SF']
+            },
+            {
+                name: 'Half Moon Bay Art Glass',
+                description: 'Blown glass studios and coastal art galleries',
+                duration: '2-3 hours',
+                detailedDescription: 'Watch glass blowing demonstrations and browse coastal-themed art galleries in this charming seaside town. Perfect for a relaxing art-focused day trip.',
+                locationDetails: 'Main Street, Half Moon Bay. 45 minutes south via Highway 1.',
+                tips: ['Time visit with glass blowing demos', 'Combine with pumpkin patches in fall', 'Great seafood restaurants nearby', 'Scenic coastal drive']
             }
         ],
         'moderate': [
@@ -48,6 +72,22 @@ const bayAreaActivities = {
                 detailedDescription: 'Massive monthly celebration featuring gallery openings, street art, food trucks, live performances, and local vendors throughout downtown Oakland arts district.',
                 locationDetails: 'Telegraph Ave, downtown Oakland, first Friday of each month 6-10pm.',
                 tips: ['Very crowded - arrive early', 'Free event, pay for food/drinks', 'Wear comfortable walking shoes', 'Some galleries open other days too']
+            },
+            {
+                name: 'Marin Museum of Contemporary Art',
+                description: 'Cutting-edge contemporary art in historic Novato',
+                duration: '2-3 hours',
+                detailedDescription: 'Contemporary art museum featuring experimental works, digital art, and installations by emerging artists. Often includes interactive exhibits.',
+                locationDetails: '500 Palm Dr, Novato. 45 minutes north via 101. Free parking.',
+                tips: ['Check for artist talks and opening receptions', 'Free admission on first Fridays', 'Combine with Novato downtown exploration', 'Great for photography enthusiasts']
+            },
+            {
+                name: 'Stanford Cantor Arts Center',
+                description: 'University museum with diverse collections',
+                duration: '3-4 hours',
+                detailedDescription: 'Impressive museum featuring Asian art, sculptures by Rodin, contemporary works, and rotating exhibitions. Beautiful outdoor sculpture garden.',
+                locationDetails: '328 Lomita Dr, Stanford. 45 minutes south on 101. Free parking.',
+                tips: ['Always free admission', 'Outdoor sculpture garden is spectacular', 'Campus is worth exploring', 'Great café for lunch']
             }
         ],
         'epic': [
@@ -58,6 +98,22 @@ const bayAreaActivities = {
                 detailedDescription: 'Complete exploration of BAMPFA with its cutting-edge contemporary art, film screenings, and special exhibitions. Known for pushing artistic boundaries.',
                 locationDetails: '2120 Oxford St, Berkeley. Street parking or paid lots nearby.',
                 tips: ['Check film screening schedule', 'Student discounts available', 'Free first Thursday evenings', 'Combine with UC Berkeley campus walk']
+            },
+            {
+                name: 'Napa Valley Art Scene Day Trip',
+                description: 'Full day exploring galleries, studios, and sculpture gardens',
+                duration: '6-8 hours',
+                detailedDescription: 'Complete art tour of Napa Valley including winery art collections, sculpture gardens, artist studios, and the di Rosa art preserve with its incredible contemporary collection.',
+                locationDetails: 'Various locations in Napa Valley, 1 hour north via 29. Start in Napa or St. Helena.',
+                tips: ['Plan route in advance', 'Some venues require appointments', 'Combine with wine tasting', 'Designate a driver or use tour services']
+            },
+            {
+                name: 'Santa Cruz Art & Culture Immersion',
+                description: 'Full day cultural experience in artistic beach town',
+                duration: '6-8 hours',
+                detailedDescription: 'Explore Santa Cruz Art League, local galleries, murals, and the unique artistic culture of this coastal town. Includes beach art installations and boardwalk culture.',
+                locationDetails: 'Downtown Santa Cruz, 1 hour south via 17. Multiple parking options.',
+                tips: ['Start early to cover all venues', 'Beach art changes with tides', 'Great local food scene', 'Combine with coastal walks']
             }
         ]
     },
@@ -79,6 +135,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Crystal-clear tunnels let you walk through the San Francisco Bay ecosystem. See sharks, rays, and thousands of local fish swimming overhead and around you.',
                 locationDetails: 'Pier 39, Fishermans Wharf, San Francisco. Paid parking or public transit recommended.',
                 tips: ['Combine with other Pier 39 attractions', 'Behind-scenes tours available', 'Touch tanks for hands-on experience', 'Less crowded weekday mornings']
+            },
+            {
+                name: 'Happy Hollow Park & Zoo',
+                description: 'Family-friendly zoo and amusement park in San Jose',
+                duration: '3-4 hours',
+                detailedDescription: 'Charming combination of small zoo and vintage rides perfect for families with young children. Features rescued animals, puppet shows, and gentle amusement rides.',
+                locationDetails: '748 Story Rd, San Jose. 1 hour south via 101. Free parking available.',
+                tips: ['Perfect for families with kids under 10', 'Combination zoo and ride tickets available', 'Less crowded than larger zoos', 'Great picnic areas throughout park']
+            },
+            {
+                name: 'Coyote Point Recreation Area',
+                description: 'Wildlife viewing and nature center on the bay',
+                duration: '2-3 hours',
+                detailedDescription: 'Bayfront park with CuriOdyssey science museum and wildlife habitats featuring native California animals including coyotes, bobcats, and birds of prey.',
+                locationDetails: '1701 Coyote Point Dr, San Mateo. 30 minutes south on 101. Paid parking.',
+                tips: ['Combine museum visit with bayfront walking', 'Great for kids interested in local wildlife', 'Beautiful bay views for picnicking', 'Educational programs available weekends']
+            },
+            {
+                name: 'Petting Farm at Ardenwood',
+                description: 'Historic farm with friendly farm animals',
+                duration: '2-3 hours',
+                detailedDescription: 'Working Victorian-era farm where visitors can pet and feed goats, sheep, chickens, and pigs. Includes historic farm buildings and seasonal activities.',
+                locationDetails: '34600 Ardenwood Blvd, Fremont. 45 minutes southeast via 880. Free parking.',
+                tips: ['Seasonal hours vary', 'Bring quarters for animal feed', 'Great for toddlers and young kids', 'Combine with historic house tours']
             }
         ],
         'moderate': [
@@ -97,6 +177,30 @@ const bayAreaActivities = {
                 detailedDescription: 'See rescued seals, sea lions, and other marine mammals being rehabilitated. Educational tours explain marine conservation efforts.',
                 locationDetails: '2000 Bunker Rd, Sausalito (Marin Headlands). Free parking.',
                 tips: ['Free admission, donations welcome', 'Best viewing during feeding times', 'Dress warmly - can be windy', 'Call ahead for tour availability']
+            },
+            {
+                name: 'Wildlife Refuge at Don Edwards',
+                description: 'Vast wetland preserve with diverse bird species',
+                duration: '3-4 hours',
+                detailedDescription: 'Explore 30,000 acres of salt ponds, marshes, and mudflats teeming with migratory birds, harbor seals, and other wildlife. Multiple walking trails of varying lengths.',
+                locationDetails: '2 Marshlands Rd, Fremont. 45 minutes southeast via 880. Free admission and parking.',
+                tips: ['Bring binoculars for best bird watching', 'Peak migration seasons are spring and fall', 'Visitor center has helpful maps and guides', 'Early morning visits see most wildlife activity']
+            },
+            {
+                name: 'Año Nuevo State Park Elephant Seals',
+                description: 'Seasonal viewing of massive elephant seals',
+                duration: '3-5 hours',
+                detailedDescription: 'Guided walks to observe northern elephant seals during breeding season (Dec-Mar). Witness dramatic battles between massive bulls and tender moments with pups.',
+                locationDetails: 'New Years Creek Rd, Pescadero. 1 hour south via Highway 1. Advance reservations required.',
+                tips: ['Breeding season tours Dec-Mar only', 'Reservations essential - book months ahead', 'Dress warmly and wear sturdy walking shoes', 'No pets allowed on guided tours']
+            },
+            {
+                name: 'Point Reyes Tule Elk Reserve',
+                description: 'Native elk herd viewing in coastal grasslands',
+                duration: '2-4 hours',
+                detailedDescription: 'Drive or hike to viewing areas where you can observe the only free-roaming elk herd in the Bay Area. Best during rutting season in fall.',
+                locationDetails: 'Point Reyes Peninsula, 1 hour north via Highway 1. Free access.',
+                tips: ['Elk are most active early morning and evening', 'Rutting season (Sept-Oct) offers dramatic behavior', 'Maintain safe distance - elk can be dangerous', 'Combine with Point Reyes lighthouse visit']
             }
         ],
         'epic': [
@@ -107,6 +211,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Full day trip to one of the worlds best aquariums featuring the mesmerizing kelp forest, sea otter exhibit, and seasonal special exhibitions.',
                 locationDetails: '886 Cannery Row, Monterey. 2-hour drive from SF. Paid parking available.',
                 tips: ['Buy tickets online in advance', 'Peak times are very crowded', 'Combine with Cannery Row visit', 'Pack lunch or eat at aquarium café']
+            },
+            {
+                name: 'Safari West African Wildlife Experience',
+                description: 'African safari adventure in Sonoma County',
+                duration: '6-8 hours',
+                detailedDescription: 'Authentic African safari experience with giraffes, zebras, cheetahs, and more on 400 acres of Sonoma County hills. Includes guided jeep tours and walking experiences.',
+                locationDetails: '3115 Porter Creek Rd, Santa Rosa. 1.5 hours north via 101. Advance reservations required.',
+                tips: ['Full day experience with multiple tour options', 'Expensive but unforgettable', 'Overnight tent accommodations available', 'Photography tours offered seasonally']
+            },
+            {
+                name: 'Whale Watching from Half Moon Bay',
+                description: 'Full day whale and marine life watching expedition',
+                duration: '6-8 hours',
+                detailedDescription: 'Seasonal boat trips to see gray whales, humpback whales, dolphins, and other marine life. Peak seasons offer nearly guaranteed whale sightings.',
+                locationDetails: 'Pillar Point Harbor, Half Moon Bay. 45 minutes south via Highway 1.',
+                tips: ['Gray whale season Dec-Apr, humpback May-Nov', 'Bring seasickness medication', 'Dress very warmly in layers', 'Book ahead during peak whale seasons']
+            },
+            {
+                name: 'Farallon Islands Seabird Watching',
+                description: 'Boat trip to remote island wildlife sanctuary',
+                duration: '8-10 hours',
+                detailedDescription: 'Full day boat expedition to the Farallon Islands to observe massive seabird colonies, sea lions, and possible whale encounters. One of the most biodiverse spots on the California coast.',
+                locationDetails: 'Departs from San Francisco Bay. Full day commitment with limited seasonal trips.',
+                tips: ['Limited trips - book far in advance', 'Rough seas possible - seasickness medication essential', 'Cannot land on islands - viewing from boat only', 'Incredible photography opportunities']
             }
         ]
     },
@@ -120,6 +248,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Family-friendly pier with street performers, shops, restaurants, and small attractions like the carousel and mirror maze. Sea lions often visible on the docks.',
                 locationDetails: 'Pier 39, Fishermans Wharf, San Francisco. Paid parking available.',
                 tips: ['Free to walk around, pay per attraction', 'Sea lions best viewed in afternoon', 'Very touristy but fun for families', 'Combine with Aquarium of the Bay']
+            },
+            {
+                name: 'Santa Cruz Beach Boardwalk',
+                description: 'Classic seaside amusement park with vintage rides',
+                duration: '3-5 hours',
+                detailedDescription: 'Historic beachfront amusement park featuring the famous Giant Dipper wooden roller coaster and classic carnival games. Perfect blend of vintage charm and modern fun.',
+                locationDetails: '400 Beach St, Santa Cruz. 1 hour south via Highway 17. Paid parking available.',
+                tips: ['Free admission - pay per ride or get wristband', 'Combine with beach time', 'Historic roller coaster is a must-ride', 'Very busy on summer weekends']
+            },
+            {
+                name: 'Tilden Park Merry-Go-Round',
+                description: 'Vintage carousel in scenic Berkeley hills park',
+                duration: '2-3 hours',
+                detailedDescription: 'Beautiful hand-carved carousel from 1911 in a lovely park setting. Combine with miniature train rides, playgrounds, and nature trails.',
+                locationDetails: 'Tilden Regional Park, Berkeley Hills. 30 minutes from SF via tunnel roads.',
+                tips: ['Very affordable vintage experience', 'Great for young families', 'Combine with park hiking trails', 'Seasonal hours - check before visiting']
+            },
+            {
+                name: 'Blackberry Farm Family Fun Park',
+                description: 'Small-scale family amusement park in Cupertino',
+                duration: '2-4 hours',
+                detailedDescription: 'Intimate family park with pony rides, train rides, and playground equipment. Perfect for families with very young children who might be overwhelmed by larger parks.',
+                locationDetails: '10300 Blackberry Hill, Cupertino. 45 minutes south via 280. Free parking.',
+                tips: ['Perfect for toddlers and preschoolers', 'Much less overwhelming than big theme parks', 'Affordable pricing', 'Bring picnic lunch to enjoy grounds']
             }
         ],
         'moderate': [
@@ -132,12 +284,28 @@ const bayAreaActivities = {
                 tips: ['Great for kids 2-12', 'Create take-home movies', 'Less crowded weekday mornings', 'Combine with nearby museums']
             },
             {
-                name: 'California Adventure Park',
-                description: 'Adventure-themed attractions in Santa Clara',
+                name: 'Californias Great America',
+                description: 'Major theme park with roller coasters and family rides',
                 duration: '4-6 hours',
-                detailedDescription: 'Great America theme park with roller coasters, family rides, and seasonal events. Mix of thrill rides and gentler attractions.',
+                detailedDescription: 'Full-scale theme park featuring intense roller coasters, family rides, and seasonal events like Halloween Haunt. Mix of thrill rides and gentler attractions for all ages.',
                 locationDetails: '4701 Great America Pkwy, Santa Clara. 1-hour drive from SF. Paid parking.',
                 tips: ['Check seasonal operating schedule', 'Buy tickets online for discounts', 'Very crowded on weekends', 'Bring sunscreen and water']
+            },
+            {
+                name: 'Exploratorium',
+                description: 'Interactive science museum with hands-on exhibits',
+                duration: '3-5 hours',
+                detailedDescription: 'World-renowned science museum with hundreds of interactive exhibits covering physics, biology, and human perception. The Tactile Dome offers a unique crawling experience in complete darkness.',
+                locationDetails: 'Pier 15, Embarcadero, San Francisco. Limited parking - public transit recommended.',
+                tips: ['Tactile Dome requires separate timed tickets', 'Very popular with school groups weekdays', 'Thursday evening after dark sessions for adults', 'Can easily spend full day exploring']
+            },
+            {
+                name: 'Gilroy Gardens Family Theme Park',
+                description: 'Botanical theme park with unique tree attractions',
+                duration: '4-6 hours',
+                detailedDescription: 'Unique theme park combining rides with horticultural wonders, including circus trees and topiary gardens. Features family-friendly rides themed around gardens and nature.',
+                locationDetails: '3050 Hecker Pass Hwy, Gilroy. 1.5 hours south via 101. Free parking.',
+                tips: ['Seasonal operation - closed in winter', 'Great for families with younger kids', 'Unique circus trees are fascinating', 'Less crowded alternative to Great America']
             }
         ],
         'epic': [
@@ -148,6 +316,22 @@ const bayAreaActivities = {
                 detailedDescription: 'Full-scale theme park in Vallejo featuring intense roller coasters, animal shows, and water rides. Combines thrill rides with marine life presentations.',
                 locationDetails: '1001 Fairgrounds Dr, Vallejo. 1-hour drive from SF. Paid parking.',
                 tips: ['Full day commitment', 'Season passes often better value', 'Very crowded summer weekends', 'Bring change of clothes for water rides']
+            },
+            {
+                name: 'Disney California Adventure Weekend',
+                description: 'Two-day trip to Disneyland Resort in Southern California',
+                duration: '2 days',
+                detailedDescription: 'Epic weekend adventure to experience both Disneyland and California Adventure parks. Includes character dining, parades, and exclusive attractions like Cars Land and Marvel Campus.',
+                locationDetails: '1313 Disneyland Dr, Anaheim. 6-hour drive or 1.5-hour flight from SF.',
+                tips: ['Book hotels and tickets far in advance', 'Consider Genie+ for shorter wait times', 'Two-day minimum recommended', 'Flying often cheaper than driving with hotel costs']
+            },
+            {
+                name: 'Universal Studios Hollywood Day Trip',
+                description: 'Movie studio theme park with cutting-edge attractions',
+                duration: '8-12 hours',
+                detailedDescription: 'Experience movie magic with behind-the-scenes studio tours, thrilling rides based on blockbuster films, and the famous Wizarding World of Harry Potter.',
+                locationDetails: '100 Universal City Plaza, Universal City. 6-hour drive or 1.5-hour flight from SF.',
+                tips: ['Studio tour is a must-do unique experience', 'Express passes can save hours of waiting', 'Consider flying for day trip', 'Park can be done in one very full day']
             }
         ]
     },
@@ -169,6 +353,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Easy 3.4-mile paved path around Oaklands jewel - Lake Merritt. Great for walking, jogging, or cycling with downtown views and bird life.',
                 locationDetails: 'Multiple access points around lake, Oakland. Street parking and paid lots available.',
                 tips: ['Completely flat and paved', 'Great for bird watching', 'Rent paddle boats or kayaks', 'Saturday farmers market nearby']
+            },
+            {
+                name: 'Sausalito Waterfront Promenade',
+                description: 'Scenic harbor walk with stunning bay views',
+                duration: '1-2 hours',
+                detailedDescription: 'Easy waterfront stroll through charming Sausalito with panoramic views of San Francisco skyline, Angel Island, and luxury yachts. Perfect for leisurely afternoon walks.',
+                locationDetails: 'Downtown Sausalito waterfront. Take ferry from SF or drive via Golden Gate Bridge.',
+                tips: ['Combine with ferry ride for car-free trip', 'Many cafes and restaurants along route', 'Great for photography', 'Can extend walk to houseboats area']
+            },
+            {
+                name: 'Stevens Creek Trail',
+                description: 'Paved multi-use trail through Silicon Valley',
+                duration: '1-3 hours',
+                detailedDescription: 'Flat, paved trail following Stevens Creek through parks, neighborhoods, and open space. Popular with families, cyclists, and dog walkers.',
+                locationDetails: 'Multiple access points from Palo Alto to Mountain View. Free parking at various trailheads.',
+                tips: ['Completely flat and family-friendly', 'Connects multiple parks and playgrounds', 'Good for strollers and wheelchairs', 'Plenty of shade in most sections']
+            },
+            {
+                name: 'Napa River Walk',
+                description: 'Peaceful riverside path through downtown Napa',
+                duration: '1-2 hours',
+                detailedDescription: 'Easy paved walk along the Napa River through downtown, passing parks, restaurants, and tasting rooms. Perfect for combining with wine country exploration.',
+                locationDetails: 'Downtown Napa, multiple access points. 1 hour north via Highway 29. Free street parking.',
+                tips: ['Flat and easy for all ages', 'Many restaurants and tasting rooms nearby', 'Great for morning or evening strolls', 'Can extend to Oxbow Public Market']
             }
         ],
         'moderate': [
@@ -187,6 +395,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Explore historic military batteries and bunkers with spectacular views of Golden Gate Bridge and San Francisco Bay. Rich military history and great photo opportunities.',
                 locationDetails: 'Multiple trailheads in Presidio, SF. Visitor center parking available.',
                 tips: ['Download Presidio app for history', 'Multiple difficulty levels available', 'Great for history buffs', 'Can be combined with Crissy Field']
+            },
+            {
+                name: 'Muir Woods National Monument',
+                description: 'Walk among ancient coastal redwoods',
+                duration: '2-4 hours',
+                detailedDescription: 'Well-maintained boardwalks and paths through cathedral-like groves of 1,000-year-old coastal redwoods. Multiple loop options from easy to moderately challenging.',
+                locationDetails: 'Muir Woods Rd, Mill Valley. 45 minutes north via Highway 1. Advance parking reservations required.',
+                tips: ['Parking reservations essential', 'Cooler temperatures under tree canopy', 'Early morning visits are less crowded', 'Combine with Muir Beach visit']
+            },
+            {
+                name: 'Angel Island State Park Perimeter Road',
+                description: 'Island walking tour with 360-degree bay views',
+                duration: '3-5 hours',
+                detailedDescription: 'Circumnavigate Angel Island on paved Perimeter Road offering spectacular panoramic views of San Francisco, Marin, and East Bay. Rich immigration and military history.',
+                locationDetails: 'Take ferry from SF, Sausalito, or Tiburon to Angel Island. Ferry schedules vary seasonally.',
+                tips: ['Bring water and snacks - limited services on island', 'Can rent bikes for faster tour', 'Tram tours available for less walking', 'Ferry tickets required in advance']
+            },
+            {
+                name: 'Alameda Creek Trail',
+                description: 'Long flat trail from bay to hills',
+                duration: '2-4 hours',
+                detailedDescription: 'Paved 12-mile trail following Alameda Creek from San Francisco Bay to Niles Canyon. Great for longer walks with varied scenery from wetlands to rolling hills.',
+                locationDetails: 'Multiple access points from Fremont to Union City. Free parking at various locations.',
+                tips: ['Choose your distance - trail is very long', 'Mostly flat with gentle inclines', 'Popular with cyclists - stay alert', 'Great for bird watching near bay']
             }
         ],
         'epic': [
@@ -197,11 +429,61 @@ const bayAreaActivities = {
                 detailedDescription: 'Strenuous hike to 2,571-foot summit offering 360-degree views of entire Bay Area, Pacific Ocean, and on clear days, the Sierra Nevada mountains.',
                 locationDetails: 'Multiple trailheads in Marin. Pantoll parking area most popular. 45-minute drive from SF.',
                 tips: ['Start early to avoid crowds', 'Bring plenty of water', 'Check weather conditions', 'Can drive partway up if needed']
+            },
+            {
+                name: 'Point Reyes Lighthouse Hike',
+                description: 'Dramatic coastal hike to historic lighthouse',
+                duration: '4-6 hours',
+                detailedDescription: 'Challenging hike down steep cliffs to Point Reyes Lighthouse with spectacular ocean views and potential whale watching. Historic lighthouse perched dramatically on rocky cliffs.',
+                locationDetails: 'Point Reyes National Seashore, 1.5 hours north via Highway 1. Free parking.',
+                tips: ['Very steep return climb - 300+ steps', 'Often very windy and foggy', 'Whale watching season Dec-Apr', 'Lighthouse only open limited hours']
+            },
+            {
+                name: 'Half Dome Day Hike from Yosemite',
+                description: 'Epic granite dome hike with cables section',
+                duration: '10-14 hours',
+                detailedDescription: 'Legendary 16-mile round trip hike culminating in cable-assisted climb up the back of Half Dome. Requires permits, excellent fitness, and early start.',
+                locationDetails: 'Yosemite Valley, 4-hour drive from SF. Advance permits required. Park entry fee.',
+                tips: ['Permits required months in advance', 'Extremely strenuous - training recommended', 'Start before dawn for safety', 'Gloves essential for cables section']
+            },
+            {
+                name: 'Mission Peak Regional Preserve',
+                description: 'Steep climb to distinctive peak with panoramic views',
+                duration: '3-5 hours',
+                detailedDescription: 'Challenging 6-mile round trip hike to distinctive peak visible throughout the Bay Area. The famous pole at the summit offers incredible 360-degree views on clear days.',
+                locationDetails: '680 Stanford Ave, Fremont. 45 minutes southeast via 880. Free parking.',
+                tips: ['Very steep and exposed - start early', 'Bring plenty of water and sun protection', 'Can be extremely crowded on weekends', 'Instagram-famous summit pole']
             }
         ]
     },
 
     'ADVENTURE': {
+        'chill': [
+            {
+                name: 'Segway Tour of Golden Gate Park',
+                description: 'Guided Segway exploration of the park',
+                duration: '2-3 hours',
+                detailedDescription: 'Easy introduction to Segway riding while exploring Golden Gate Park highlights. Includes brief training and guided tour of major attractions.',
+                locationDetails: 'Multiple tour companies in SF. Tours typically start from Fishermans Wharf area.',
+                tips: ['No experience necessary - training included', 'Minimum age restrictions apply', 'Wear comfortable closed-toe shoes', 'Tours cancelled in heavy rain']
+            },
+            {
+                name: 'Bay Area Discovery Museum Adventure',
+                description: 'Hands-on exploration and discovery activities',
+                duration: '2-4 hours',
+                detailedDescription: 'Interactive museum designed for kids with outdoor adventure elements including climbing structures, water play, and art creation in beautiful Marin setting.',
+                locationDetails: '557 McReynolds Rd, Sausalito. Under Golden Gate Bridge. Free parking.',
+                tips: ['Designed for kids 0-10', 'Outdoor areas weather dependent', 'Great bay views from location', 'Combine with Marin Headlands exploration']
+            },
+            {
+                name: 'Treasure Island Adventure',
+                description: 'Urban exploration of former military island',
+                duration: '2-3 hours',
+                detailedDescription: 'Explore the fascinating history and art installations on this former Navy base turned arts community. Features unique views of SF skyline and Bay Bridge.',
+                locationDetails: 'Treasure Island, San Francisco. Free parking available.',
+                tips: ['Free to explore public areas', 'Amazing city skyline views', 'Artist studios and galleries to visit', 'Windy - bring layers']
+            }
+        ],
         'moderate': [
             {
                 name: 'Golden Gate Bridge Bike Ride',
@@ -218,6 +500,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Popular outdoor climbing spot with routes for beginners to advanced climbers. Great introduction to Bay Area rock climbing scene.',
                 locationDetails: 'Indian Rock Park, Berkeley Hills. Street parking available.',
                 tips: ['Bring your own gear or rent locally', 'Best for experienced climbers', 'Can be crowded on weekends', 'Check weather conditions']
+            },
+            {
+                name: 'Sea Kayaking to Angel Island',
+                description: 'Guided kayak tour to historic Angel Island',
+                duration: '4-6 hours',
+                detailedDescription: 'Paddle from Sausalito or Tiburon to Angel Island with guided instruction. Explore secluded coves and learn about island history while enjoying bay views.',
+                locationDetails: 'Launch from Sausalito or Tiburon. Multiple tour companies available.',
+                tips: ['Previous kayaking experience helpful', 'Dress for cold water conditions', 'Tours weather dependent', 'Includes all equipment and instruction']
+            },
+            {
+                name: 'Wine Country Hot Air Ballooning',
+                description: 'Sunrise balloon flight over Napa Valley',
+                duration: '4-5 hours',
+                detailedDescription: 'Early morning hot air balloon ride over Napa Valley vineyards followed by champagne breakfast. Unforgettable aerial views of wine country.',
+                locationDetails: 'Various launch sites in Napa Valley. 1 hour drive from SF. Transportation often included.',
+                tips: ['Very early morning start required', 'Weather dependent - flights may be cancelled', 'Expensive but once-in-a-lifetime experience', 'Book well in advance']
+            },
+            {
+                name: 'Marin Headlands Horseback Riding',
+                description: 'Guided horseback tours with ocean views',
+                duration: '2-4 hours',
+                detailedDescription: 'Horseback riding through Marin Headlands with stunning Pacific Ocean and Golden Gate Bridge views. Suitable for beginners to experienced riders.',
+                locationDetails: 'Miwok Livery, Tennessee Valley. 30 minutes north via Golden Gate Bridge.',
+                tips: ['All skill levels welcome', 'Wear long pants and closed-toe shoes', 'Advance reservations required', 'Tours may be cancelled in bad weather']
             }
         ],
         'epic': [
@@ -244,6 +550,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Full-day boat trip to Farallon Islands for cage diving with great white sharks. Includes all gear and marine biologist guides.',
                 locationDetails: 'Departs from various SF Bay marinas. Full-day commitment.',
                 tips: ['Season runs Sept-Nov', 'Must be comfortable swimming', 'Seasickness common - take medication', 'Book months in advance']
+            },
+            {
+                name: 'Skydiving over Monterey Bay',
+                description: 'Tandem skydiving with coastal views',
+                duration: '4-6 hours',
+                detailedDescription: 'Tandem skydiving from 15,000 feet with spectacular views of Monterey Bay, Santa Cruz Mountains, and Pacific coastline. Includes training and video packages available.',
+                locationDetails: 'Monterey Regional Airport, 2 hours south of SF. Transportation or overnight stay recommended.',
+                tips: ['Weather dependent - may be rescheduled', 'Weight and age restrictions apply', 'Video/photo packages available', 'Book well in advance']
+            },
+            {
+                name: 'Paragliding from Mount Tamalpais',
+                description: 'Solo or tandem paragliding adventure',
+                duration: '4-8 hours',
+                detailedDescription: 'Launch from Mount Tamalpais for paragliding flights over Marin County with incredible bay views. Includes instruction for beginners or tandem flights.',
+                locationDetails: 'Various launch sites on Mount Tamalpais, Marin County. 45 minutes north of SF.',
+                tips: ['Weather and wind dependent', 'Instruction course required for solo flights', 'Tandem flights available for beginners', 'Amazing photography opportunities']
+            },
+            {
+                name: 'Big Sur Backpacking Adventure',
+                description: 'Multi-day wilderness backpacking trip',
+                duration: '2-3 days',
+                detailedDescription: 'Epic backpacking adventure through Big Sur wilderness with coastal redwoods, rugged coastline, and pristine wilderness. Various trail options for different skill levels.',
+                locationDetails: 'Big Sur area, 3-hour drive south via Highway 1. Permits may be required.',
+                tips: ['Requires backpacking gear and experience', 'Check trail conditions and fire restrictions', 'Book campsites well in advance', 'Bring layers for changing weather']
             }
         ]
     },
@@ -265,6 +595,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Sandy beach walk along San Francisco Bay with incredible Golden Gate Bridge views. Popular with families, dog walkers, and photographers.',
                 locationDetails: 'Crissy Field, Presidio, SF. Free parking available.',
                 tips: ['Very windy - bring layers', 'Great for dogs (off-leash area)', 'Popular with kite flyers', 'Restrooms and snack bar available']
+            },
+            {
+                name: 'Sausalito Houseboats Tour',
+                description: 'Self-guided walk through floating home community',
+                duration: '1-2 hours',
+                detailedDescription: 'Explore the unique floating home community in Sausalito featuring colorful houseboats, artistic gardens, and bohemian lifestyle. Peaceful waterside stroll.',
+                locationDetails: 'Waldo Point and Issaquah Dock, Sausalito. Free street parking available.',
+                tips: ['Respect residents privacy', 'Great for photography', 'Combine with downtown Sausalito visit', 'Some houseboats are works of art']
+            },
+            {
+                name: 'Foster City Lagoon Walk',
+                description: 'Easy lagoon walk in planned waterfront community',
+                duration: '1-2 hours',
+                detailedDescription: 'Peaceful walk around man-made lagoons in Foster City with calm water views, modern architecture, and well-maintained paths. Perfect for easy exercise.',
+                locationDetails: 'Foster City, 30 minutes south via 101. Multiple parking areas available.',
+                tips: ['Completely flat and paved', 'Good for jogging or cycling', 'Several lagoons to explore', 'Less crowded than SF waterfront areas']
+            },
+            {
+                name: 'Half Moon Bay Harbor',
+                description: 'Charming fishing harbor with coastal views',
+                duration: '1-2 hours',
+                detailedDescription: 'Stroll through working fishing harbor with colorful boats, fresh seafood vendors, and coastal atmosphere. Watch fishing boats come and go.',
+                locationDetails: 'Pillar Point Harbor, Half Moon Bay. 45 minutes south via Highway 1.',
+                tips: ['Great fresh seafood at harbor restaurants', 'Best boat activity in morning', 'Combine with coastal drive', 'Can be very windy']
             }
         ],
         'moderate': [
@@ -283,6 +637,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Sailing lessons or skippered charters on San Francisco Bay. Experience sailing under Golden Gate Bridge with stunning city skyline views.',
                 locationDetails: 'Multiple marinas including Sausalito, SF Marina, and Berkeley.',
                 tips: ['Dress very warmly', 'Motion sickness possible', 'Some sailing experience helpful', 'Sunset sails very popular']
+            },
+            {
+                name: 'Stand-up Paddleboarding in Sausalito',
+                description: 'SUP lessons and tours in protected waters',
+                duration: '2-3 hours',
+                detailedDescription: 'Learn stand-up paddleboarding in the calm, protected waters near Sausalito with stunning views of San Francisco skyline and Angel Island.',
+                locationDetails: 'Schoonmaker Beach, Sausalito. Multiple SUP rental and lesson companies.',
+                tips: ['Beginner-friendly protected waters', 'Wetsuit usually included', 'Great core workout', 'Fall in water is part of learning']
+            },
+            {
+                name: 'Russian River Canoeing',
+                description: 'Peaceful river paddling through wine country',
+                duration: '3-5 hours',
+                detailedDescription: 'Gentle river canoeing through Sonoma County wine country with stops at beaches and riverside towns. Family-friendly with stunning scenery.',
+                locationDetails: 'Various launch points along Russian River, 1.5 hours north via 101.',
+                tips: ['Summer offers warmest water', 'Shuttle service usually included', 'Bring waterproof bag for belongings', 'Can combine with wine tasting']
+            },
+            {
+                name: 'Lake Chabot Regional Park Boating',
+                description: 'Freshwater boating and fishing in East Bay hills',
+                duration: '3-4 hours',
+                detailedDescription: 'Rent boats or bring your own to beautiful Lake Chabot surrounded by rolling hills. Popular for fishing, rowing, and peaceful water recreation.',
+                locationDetails: '17600 Lake Chabot Rd, Castro Valley. 45 minutes east via 580. Entry fee required.',
+                tips: ['Boat rentals available on weekends', 'Great for fishing enthusiasts', 'Hiking trails around lake', 'Picnic areas available']
             }
         ],
         'epic': [
@@ -293,6 +671,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Learn to surf at Ocean Beach with wetsuit and board rentals. Cold water surfing experience with consistent waves year-round.',
                 locationDetails: 'Ocean Beach, San Francisco. Street parking available.',
                 tips: ['Very cold water - thick wetsuit required', 'Strong currents and sharks possible', 'Best for intermediate+ swimmers', 'Lessons recommended for beginners']
+            },
+            {
+                name: 'Monterey Bay Sea Kayaking Adventure',
+                description: 'Multi-day sea kayaking expedition',
+                duration: '6-8 hours or multi-day',
+                detailedDescription: 'Advanced sea kayaking in Monterey Bay with opportunities to paddle with sea otters, seals, and possibly whales. Includes camping options for multi-day trips.',
+                locationDetails: 'Various launch points in Monterey Bay area, 2 hours south of SF.',
+                tips: ['Previous kayaking experience required', 'Weather and swell dependent', 'Wildlife encounters possible but not guaranteed', 'Camping permits needed for overnight trips']
+            },
+            {
+                name: 'Whitewater Rafting on American River',
+                description: 'Class III-IV rapids adventure near Sacramento',
+                duration: '6-8 hours',
+                detailedDescription: 'Thrilling whitewater rafting on American River with Class III-IV rapids. Professional guides ensure safety while delivering adrenaline-pumping adventure.',
+                locationDetails: 'American River, 2 hours northeast via I-80. Multiple outfitters available.',
+                tips: ['Season typically April-September', 'Swimming ability required', 'Lunch usually included', 'Expect to get completely soaked']
+            },
+            {
+                name: 'Lake Tahoe Multi-Sport Water Adventure',
+                description: 'Full day water sports at alpine lake',
+                duration: '6-10 hours',
+                detailedDescription: 'Epic day at Lake Tahoe combining multiple water activities: jet skiing, paddleboarding, kayaking, and boat tours of the crystal-clear alpine lake.',
+                locationDetails: 'South Lake Tahoe, 4-hour drive from SF via I-80. Multiple rental companies.',
+                tips: ['Summer offers warmest water', 'High altitude - bring sunscreen', 'Book accommodations for overnight trip', 'Water is very cold even in summer']
             }
         ]
     },
@@ -314,6 +716,30 @@ const bayAreaActivities = {
                 detailedDescription: '18-hole disc golf course winding through Golden Gate Park trees and meadows. Free to play, just bring discs.',
                 locationDetails: 'Course starts near Buffalo Paddock, Golden Gate Park, SF.',
                 tips: ['Bring your own discs or buy at nearby shops', 'Course map available online', 'Watch for pedestrians and cyclists', 'Can play year-round']
+            },
+            {
+                name: 'Dolores Park Pickup Sports',
+                description: 'Casual pickup games in popular SF park',
+                duration: '1-3 hours',
+                detailedDescription: 'Join pickup soccer, ultimate frisbee, or volleyball games at Dolores Park. Friendly community welcomes players of all skill levels.',
+                locationDetails: 'Dolores Park, Mission District, SF. Street parking available.',
+                tips: ['Weekend afternoons most active', 'Just show up and ask to join', 'Bring water - limited shade', 'Games are weather dependent']
+            },
+            {
+                name: 'Miniature Golf at Pier 39',
+                description: 'Family-friendly mini golf with bay views',
+                duration: '1-2 hours',
+                detailedDescription: 'Two-level miniature golf course at Pier 39 with San Francisco landmarks as obstacles. Great for families and couples.',
+                locationDetails: 'Pier 39, Fishermans Wharf, SF. Paid parking or public transit recommended.',
+                tips: ['Gets busy during tourist season', 'Good for all ages', 'Combine with other Pier 39 activities', 'Indoor alternative on foggy days']
+            },
+            {
+                name: 'Bowling at Presidio Bowl',
+                description: 'Vintage bowling alley with modern amenities',
+                duration: '1-2 hours',
+                detailedDescription: 'Classic bowling experience at historic Presidio location with updated lanes, food service, and occasional live music events.',
+                locationDetails: '93 Moraga Ave, Presidio, SF. Free parking available.',
+                tips: ['Reservations recommended for weekends', 'Cosmic bowling events on weekends', 'Full bar and restaurant on-site', 'Shoe rental included']
             }
         ],
         'moderate': [
@@ -332,6 +758,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Watch the Golden State Warriors play at state-of-the-art Chase Center. High-energy games with enthusiastic crowds.',
                 locationDetails: 'Chase Center, Mission Bay, SF. Limited parking, public transit recommended.',
                 tips: ['Tickets expensive for popular games', 'Arena has excellent food options', 'Very loud - consider ear protection', 'Arrive early to explore the venue']
+            },
+            {
+                name: 'Golf at Lincoln Park',
+                description: 'Scenic 18-hole public golf course',
+                duration: '4-5 hours',
+                detailedDescription: 'Play golf with stunning Golden Gate Bridge and ocean views at San Franciscos most scenic public course. Challenging layout with coastal winds.',
+                locationDetails: '300 34th Ave, SF. Near Legion of Honor museum. Street parking available.',
+                tips: ['Book tee times in advance', 'Bring warm clothes - very windy', 'Can walk or rent cart', 'Combine with Legion of Honor visit']
+            },
+            {
+                name: 'Oakland As Baseball Game',
+                description: 'Major League Baseball in the East Bay',
+                duration: '3-4 hours',
+                detailedDescription: 'Catch an Oakland Athletics game at the Oakland Coliseum. More affordable than Giants games with enthusiastic local fan base.',
+                locationDetails: 'Oakland Coliseum, 7000 Coliseum Way, Oakland. Free parking available.',
+                tips: ['Much cheaper than Giants tickets', 'Free parking is major advantage', 'Take BART to avoid traffic', 'Smaller, more intimate venue']
+            },
+            {
+                name: 'Bay Area Derby Racing',
+                description: 'Roller derby matches with local teams',
+                duration: '2-3 hours',
+                detailedDescription: 'Watch fast-paced roller derby action with Bay Area Roller Derby teams. High-energy sport with enthusiastic, welcoming community.',
+                locationDetails: 'Various venues around Bay Area. Check schedule for current location.',
+                tips: ['Family-friendly despite intense action', 'Very affordable entertainment', 'Bring cash for concessions', 'Community is very welcoming to newcomers']
             }
         ],
         'epic': [
@@ -342,6 +792,30 @@ const bayAreaActivities = {
                 detailedDescription: 'Annual May footrace from bay to ocean with elaborate costumes and party atmosphere. More festival than serious race.',
                 locationDetails: 'Race starts downtown SF, ends at Ocean Beach. Occurs once yearly in May.',
                 tips: ['Register well in advance', 'Costumes encouraged and expected', 'Party atmosphere, not serious racing', 'Bring camera for amazing people watching']
+            },
+            {
+                name: 'San Francisco Marathon',
+                description: 'Challenging 26.2-mile race through the city',
+                duration: '6-8 hours',
+                detailedDescription: 'Annual marathon featuring challenging hills, stunning bay views, and passage across Golden Gate Bridge. One of Americas most scenic marathon courses.',
+                locationDetails: 'Race starts and ends in Golden Gate Park. Occurs annually in summer.',
+                tips: ['Serious training required for full marathon', 'Half marathon option also available', 'Very hilly course - not for beginners', 'Register months in advance']
+            },
+            {
+                name: 'Alcatraz Island Triathlon',
+                description: 'Swim from Alcatraz plus bike and run',
+                duration: '4-6 hours',
+                detailedDescription: 'Epic triathlon starting with 1.5-mile swim from Alcatraz Island to shore, followed by challenging bike and run segments through San Francisco.',
+                locationDetails: 'Start at Alcatraz Island, finish at Crissy Field. Annual event with limited spots.',
+                tips: ['Must be very strong swimmer', 'Cold water swimming experience required', 'Register far in advance - limited spots', 'Wetsuit strongly recommended']
+            },
+            {
+                name: 'Big Sur International Marathon',
+                description: 'Spectacular coastal marathon through Big Sur',
+                duration: '8-10 hours including travel',
+                detailedDescription: 'World-renowned marathon along dramatic Big Sur coastline with redwood forests and ocean views. Considered one of the most beautiful marathons in the world.',
+                locationDetails: 'Carmel to Big Sur, 3-hour drive south of SF. Annual April event.',
+                tips: ['Register very early - sells out quickly', 'Challenging hills and weather', 'Plan overnight stay in area', 'Shuttle transportation usually required']
             }
         ]
     }
