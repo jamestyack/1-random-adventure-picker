@@ -496,9 +496,13 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+    .mockup-header {
+        margin-bottom: 20px;
+    }
+    
     .mockup-layout {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 15px;
         text-align: center;
     }
     
@@ -513,7 +517,15 @@ body {
 
 @media (max-width: 768px) {
     .container {
-        padding: 15px;
+        padding: 10px;
+    }
+    
+    .mockup-header {
+        margin-bottom: 15px;
+    }
+    
+    .mockup-layout {
+        gap: 10px;
     }
     
     .main-title {
@@ -543,6 +555,18 @@ body {
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 8px;
+    }
+    
+    .mockup-header {
+        margin-bottom: 10px;
+    }
+    
+    .mockup-layout {
+        gap: 8px;
+    }
+    
     .main-title {
         font-size: 2.5rem;
     }
